@@ -40,7 +40,7 @@ namespace StudyUp
 
         Material materialQuery;
 
-
+        bool suggestionTaken = false;
 
         public AdvancedSearchWindow(IController controller)
         {
@@ -79,8 +79,9 @@ namespace StudyUp
                 categoryEnum = CategoryEnum.Tests;
             else
                 categoryEnum = CategoryEnum.VideoClass;
-
-            materialQuery = new Material();
+            bool isPrinted = (isPrintedOnlyCheckBox.IsChecked==true);
+            materialQuery = new Material(university, new Courses(university, courseNo, courseName), _controller.GetUserMail(), title,
+                topics, Tags, categoryEnum, isPrinted, new DateTime(), String.Empty);
 
         }
 
@@ -161,6 +162,11 @@ namespace StudyUp
 
         private void tagsChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+
+            }
+                suggestionTaken = false;
             String[] splittedTags = tagsTxtBx.Text.Split(' ');
             List<string> tagsToDelete = new List<string>();
             foreach (string tag in Tags)
@@ -208,6 +214,7 @@ namespace StudyUp
             {
 
             }
+            suggestionTaken = true;
         }
     }
 }
