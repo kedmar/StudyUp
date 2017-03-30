@@ -36,7 +36,7 @@ namespace Classes
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
-        private CategoryEnum Category { get; set; }
+        public CategoryEnum Category { get; set; }
 
         private void SetCategory(string cat)
         {

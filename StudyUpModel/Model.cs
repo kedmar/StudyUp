@@ -360,7 +360,7 @@ namespace StudyUpModel
                     string title = ds.Tables[0].Rows[i][5].ToString();
                     List<string> topic = GetDocTopics(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
                     List<string> tags = GetDocTags(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    CategoryEnum category = (ds.Tables[0].Rows[i][2].ToString();
+                    string category = ds.Tables[0].Rows[i][2].ToString();
                     bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
                     DateTime uploaded = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
                     string path = ds.Tables[0].Rows[i][1].ToString();
@@ -381,9 +381,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT * FROM Documents WHERE [Path] = '" + query + "'", connection);
-
-            command.Parameters.AddWithValue("@Tag", t);
+                "SELECT * FROM Documents WHERE [ID] = '" + docID + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -399,6 +397,18 @@ namespace StudyUpModel
         }
 
         private List<string> GetDocTopics(int docID)
+        {
+            List<int> topicIDs = getTopicIDs(docID);
+            List<string> topicNames = getTopicNames(topicIDs);
+            return topicNames;
+        }
+
+        private List<string> getTopicNames(List<int> topicIDs)
+        {
+            throw new NotImplementedException();
+        }
+
+        private List<int> getTopicIDs(int docID)
         {
             throw new NotImplementedException();
         }
@@ -460,7 +470,7 @@ namespace StudyUpModel
 
             command.Parameters.AddWithValue("@ID", newMat.ID);
             command.Parameters.AddWithValue("@Path", dataPath + "\\" + Convert.ToInt32(fileCount));
-            command.Parameters.AddWithValue("@Type", newMat.CategoryString);
+            command.Parameters.AddWithValue("@Type", newMat.Category);
             command.Parameters.AddWithValue("@HandWrite", newMat.IsPrinted);
             command.Parameters.AddWithValue("@Score", newMat.score);
             command.Parameters.AddWithValue("@Title", newMat.Title);
