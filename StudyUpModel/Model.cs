@@ -32,6 +32,8 @@ namespace StudyUpModel
             dbPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\StudyUpModel\\StudyUpDB.accdb";
             dataPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\StudyUpModel\\Data";
             counterPath = dataPath + "\\FileCount";
+            currentUser = "legacy";
+
             GetFileCount();
         }
 
@@ -134,10 +136,10 @@ namespace StudyUpModel
             List<Courses> record_list = new List<Courses>();
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                Courses field = new Courses();
-                field.CourseNo = ds.Tables[0].Rows[i][0].ToString(); ;
-                field.CourseName = ds.Tables[0].Rows[i][2].ToString();
-                field.University = UniNames[Convert.ToInt32(ds.Tables[0].Rows[i][1])];
+                string CourseNo = ds.Tables[0].Rows[i][0].ToString(); ;
+                string CourseName = ds.Tables[0].Rows[i][2].ToString();
+                string University = UniNames[Convert.ToInt32(ds.Tables[0].Rows[i][1])];
+                Courses field = new Courses(University, CourseNo, CourseName);
                 if (!record_list.Contains(field))
                     record_list.Add(field);
             }
@@ -272,6 +274,31 @@ namespace StudyUpModel
             dbClose();
             return record_list;
         }
+        private Dictionary<string, int> GetTopicNamesFromDatabase()
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT * FROM Topics", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            Dictionary<string, int> record_list = new Dictionary<string, int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int id = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                string name = ds.Tables[0].Rows[i][1].ToString();
+                if (!record_list.ContainsKey(name))
+                    record_list.Add(name, id);
+            }
+            dbClose();
+            return record_list;
+        }
 
         public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
         {
@@ -351,24 +378,141 @@ namespace StudyUpModel
             return true;
         }
 
-        private bool InsertFileUploader(Material newMaterial)
+        private bool InsertFileUploader(Material newMat)
         {
-            throw new NotImplementedException();
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO User-Doc ([User], [DocID]) VALUES (?, ?)", connection);
+
+            command.Parameters.AddWithValue("@User", currentUser);
+            command.Parameters.AddWithValue("@DocID", newMat.ID);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
         }
 
-        private bool InsertFileClass(Material newMaterial)
+        private bool InsertFileClass(Material newMat)
         {
-            throw new NotImplementedException();
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO Class-Doc ([User], [DocID], [UniversityID]) VALUES (?, ?, ?)", connection);
+
+            command.Parameters.AddWithValue("@ClassID", newMat.Course.CourseNo);
+            command.Parameters.AddWithValue("@DocID", newMat.ID);
+            command.Parameters.AddWithValue("@UniversityID", newMat.Universrty);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
         }
 
-        private bool InsertFileTopics(Material newMaterial)
+        private bool InsertFileTopics(Material newMat)
         {
-            throw new NotImplementedException();
+            Dictionary<string, int> topicNames = GetTopicNamesFromDatabase();
+            foreach (string t in newMat.Topic)
+            {
+                InsertTopic(topicNames[t], newMat.ID);
+            }
+            
+            return true;
         }
 
-        private bool InsertFileTags(Material newMaterial)
+        private bool InsertTopic(int topic, int doc)
         {
-            throw new NotImplementedException();
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO Doc-Topic ([DocumentID], [TopicID]) VALUES (?, ?)", connection);
+
+            command.Parameters.AddWithValue("@DocumentID", topic);
+            command.Parameters.AddWithValue("@TopicID", doc);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
+        }
+
+        private bool InsertFileTags(Material newMat)
+        {
+            List<string> tags = GetTagsFromDatabase();
+            List<string> newTags = new List<string>();
+            foreach (string t in newMat.Topic)
+            {
+                if (!tags.Contains(t))
+                    newTags.Add(t);
+                if (!InsertDocTag(newMat.ID, t))
+                    return false;
+            }
+            foreach (string t in tags)
+            {
+                InsertTag(t);
+                if (!InsertDocTag(newMat.ID, t))
+                    return false;
+            }
+
+            return true;
+        }
+
+        private bool InsertTag(string t)
+        {
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO Tags ([Tag]) VALUES (?)", connection);
+
+            command.Parameters.AddWithValue("@Tag", t);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
+        }
+
+        private bool InsertDocTag(int ID, string t)
+        {
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO Doc-Tag ([DocID], [Tag]) VALUES (?, ?)", connection);
+
+            command.Parameters.AddWithValue("@DocID", ID);
+            command.Parameters.AddWithValue("@Tag", t);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
         }
 
         #endregion
