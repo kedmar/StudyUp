@@ -1,19 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using StudyUpController;
 using Classes;
+using System.Windows.Media;
 
 namespace StudyUp
 {
@@ -22,36 +14,30 @@ namespace StudyUp
     /// </summary>
     public partial class PresenntMaterialWindow : Window
     {
-        delegate void Hyperlink_Click(object sender, RoutedEventArgs e);
-
-        private class TagLink
-        {
-            Hyperlink hyperlink;
-            Hyperlink_Click hyperlinkClick;
-
-            public TagLink(Hyperlink hyperlink, Hyperlink_Click hyperlinkClick)
-            {
-                this.hyperlink = hyperlink;
-                this.hyperlinkClick = hyperlinkClick;
-            }
-        }
-
+        static string[] comments = { "WOW!!!", "Completely off topic", "Helped me a lot", "Interesting :)", "I love you man <3", "Saved my life!!", "Thanksssss", "I can't agree with you", "I realy appreciate your work", "You have made several critical mistakes" };
 
         IController controler = null;
         Material material = null;
-        List<TextBlock> tagLinks = new List<TextBlock>();
-       
+        User user = null;
 
 
-
-        public PresenntMaterialWindow(ref IController controler, Material material)
+        public PresenntMaterialWindow(ref IController controler, Material material, User user)
         {
             this.controler = controler;
             this.material = material;
+            this.user = user;
             InitializeComponent();
             LoadDoc();
             LoadTags();
-
+            Random rand = new Random();
+            material.score = rand.Next(15, 150);
+            likes.Content = material.score;
+            int index1 = rand.Next(0, 10);
+            int index2 = rand.Next(0, 10);
+            while(index1== index2)
+                index2 = rand.Next(0, 10);
+            commen1.Content = comments[index1];
+            commen1.Content = comments[index2];
         }
 
         private void LoadTags()
@@ -66,15 +52,18 @@ namespace StudyUp
                 {
                     //run advanced shearch with the tag
                     List<Material> searchResult = controler.RetreiveMaterialsAdvancedSearch(tag);
-                    //open resukts window
-
+                    //open results window
+                            //DOTO!!!!!
                     //close this window
                     this.Close();
                 };
                 TextBlock tb = new TextBlock();
                 tb.HorizontalAlignment = System.Windows.HorizontalAlignment.Center;
                 tb.Inlines.Add(hyperlink);
+
+                tagsLinks.Children.Add(tb);
             }
+
         }
 
         private void LoadDoc()
@@ -84,8 +73,12 @@ namespace StudyUp
             webBrowser.NavigateToString(html); // System.Windows.Controls.WebBrowser
         }
 
-
-
+        private void LikeButton_Click(object sender, RoutedEventArgs e)
+        {
+            material.score++;
+            likes.Content = material.score;
+            likes.Foreground = new SolidColorBrush(Colors.DarkTurquoise);
+        }
 
     }
 }
