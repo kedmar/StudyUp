@@ -8,6 +8,7 @@ namespace Classes
 {
     public class Material
     {
+        public int ID { get; set; }
         public string Universrty { get; set; }
         public Courses Course { get; set; }
         public string UploaderMail { get; set; }
