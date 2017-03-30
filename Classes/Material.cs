@@ -14,7 +14,7 @@ namespace Classes
             this.CourseName = courseName;
             University = university;
         }*/
-        public Material(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool printed, DateTime uploaded, string path)
+        public Material(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool printed, DateTime uploaded, string path)
         {
             Universrty = university;
             Course = course;
@@ -22,7 +22,7 @@ namespace Classes
             Title = title;
             Topic = topic;
             Tags = tags;
-            Category = category;
+            setCategory(category);
             IsPrinted = printed;
             UploadedDateTime = uploaded;
             File = path;
@@ -37,6 +37,8 @@ namespace Classes
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
         private CategoryEnum Category { get; set; }
+
+
         public string CategoryString
         {
             get
@@ -62,6 +64,8 @@ namespace Classes
                     Category = CategoryEnum.VideoClass;
             }
         }
+
+
         public bool IsPrinted { get; set; }
         public DateTime UploadedDateTime { get; set; }
         //file = file path
