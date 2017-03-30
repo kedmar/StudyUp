@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Classes;
+using StudyUpController;
 
 namespace StudyUp
 {
@@ -19,9 +21,18 @@ namespace StudyUp
     /// </summary>
     public partial class PresentResults : Window
     {
+        private Dictionary<Material, double> results;
+        private IController _controller;
+
         public PresentResults()
         {
             InitializeComponent();
+        }
+
+        public PresentResults(IController _controller, Dictionary<Material, double> results)
+        {
+            this._controller = _controller;
+            this.results = results;
         }
     }
 }
