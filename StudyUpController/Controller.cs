@@ -58,9 +58,9 @@ namespace StudyUpController
             return m_model.GetAllUniversities();
         }
 
-        public List<string> GetAllUploadersMails()
+        public List<string> GetAllUploadersNames()
         {
-            return m_model.GetAllUploadersMails();
+            return m_model.GetAllUploadersNames();
         }
 
         public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
