@@ -360,7 +360,7 @@ namespace StudyUpModel
                     string title = ds.Tables[0].Rows[i][5].ToString();
                     List<string> topic = GetDocTopics(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
                     List<string> tags = GetDocTags(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    CategoryEnum category = GetCategory(ds.Tables[0].Rows[i][2].ToString());
+                    CategoryEnum category = (ds.Tables[0].Rows[i][2].ToString();
                     bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
                     DateTime uploaded = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
                     string path = ds.Tables[0].Rows[i][1].ToString();
@@ -401,24 +401,6 @@ namespace StudyUpModel
         private List<string> GetDocTopics(int docID)
         {
             throw new NotImplementedException();
-        }
-
-        private CategoryEnum GetCategory(string cat)
-        {
-            if (cat == "AudioClass")
-                return CategoryEnum.AudioClass;
-            if (cat == "FormulasPage")
-                return CategoryEnum.FormulasPage;
-            if (cat == "Lecture")
-                return CategoryEnum.Lecture;
-            if (cat == "Practice")
-                return CategoryEnum.Practice;
-            if (cat == "Summary")
-                return CategoryEnum.Summary;
-            if (cat == "Tests")
-                return CategoryEnum.Tests;
-            else
-                return CategoryEnum.VideoClass;
         }
 
         public bool UploadMaterial(Material newMaterial)
