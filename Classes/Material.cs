@@ -16,7 +16,7 @@ namespace Classes
             Title = title;
             Topic = topic;
             Tags = tags;
-            SetCategory(category);
+            Category = category;
             IsPrinted = printed;
             File = path;
 
@@ -29,25 +29,7 @@ namespace Classes
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
-        public CategoryEnum Category { get; set; }
-
-        private void SetCategory(string cat)
-        {
-            if (cat == "AudioClass")
-                Category = CategoryEnum.AudioClass;
-            if (cat == "FormulasPage")
-                Category = CategoryEnum.FormulasPage;
-            if (cat == "Lecture")
-                Category = CategoryEnum.Lecture;
-            if (cat == "Practice")
-                Category = CategoryEnum.Practice;
-            if (cat == "Summary")
-                Category = CategoryEnum.Summary;
-            if (cat == "Tests")
-                Category = CategoryEnum.Tests;
-            else
-                Category = CategoryEnum.VideoClass;
-        }
+        public string Category { get; set; }
         public bool IsPrinted { get; set; }
         public DateTime UploadedDateTime { get; set; }
         //file = file path
