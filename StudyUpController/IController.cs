@@ -26,5 +26,6 @@ namespace StudyUpController
         List<string> GetAllTopics();
         List<string> GetAllTags();
         List<string> GetAllCategories();
+        List<Material> RetreiveMaterialsAdvancedSearch(string tag);
     }
 }
