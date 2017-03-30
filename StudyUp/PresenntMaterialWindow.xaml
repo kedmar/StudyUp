@@ -35,8 +35,9 @@
 
         <StackPanel Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2">
             <Label HorizontalAlignment="Center"> hiiiii </Label>
+            
             <TextBlock HorizontalAlignment="Center">           
-                <Hyperlink Click="Hyperlink_Click" RequestNavigate="Hyperlink_RequestNavigate">
+                <Hyperlink Click="Hyperlink_Click">
                     Click here
                 </Hyperlink>
             </TextBlock>
