@@ -35,37 +35,37 @@ namespace StudyUpController
         public List<string> GetAllCategories()
         {
 
-            throw new NotImplementedException();
+            return m_model.GetAllCategories();
         }
 
         public List<Courses> GetAllCourses()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllCourses();
         }
 
         public List<string> GetAllTags()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllTags();
         }
 
         public List<string> GetAllTopics()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllTopics();
         }
 
         public List<string> GetAllUniversities()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllUniversities();
         }
 
         public List<string> GetAllUploadersMails()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllUploadersMails();
         }
 
         public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
         {
-            throw new NotImplementedException();
+            return m_model.RetreiveMaterialsAdvancedSearch(university, courseNo, courseName, uploaderMail, title, topic, tags, category, isPrinter, uploadDateTime);
         }
 
         public Dictionary<Material, double> RetreiveMaterialsSimpleSearch(string query)
@@ -100,7 +100,7 @@ namespace StudyUpController
 
         public bool UploadMaterial(Material newMaterial)
         {
-            throw new NotImplementedException();
+            return m_model.UploadMaterial(newMaterial);
         }
     }
 }
