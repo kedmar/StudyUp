@@ -19,17 +19,10 @@ namespace StudyUpModel
         bool UploadMaterial(Material newMaterial);
         List<string> GetAllUniversities();
         List<Courses> GetAllCourses();
-        List<string> GetAllUploadersMails();
+        List<string> GetAllUploadersNames();
         List<string> GetAllTopics();
         List<string> GetAllTags();
         List<string> GetAllCategories();
-
-
-
-
-
-
-
 
     }
 }
