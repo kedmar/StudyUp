@@ -32,6 +32,10 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
     <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
-    <Expander Header=""
+        <Expander Header="Summaries" Grid.Row="1" Grid.Column="1"  Grid.RowSpan="3" Grid.ColumnSpan="4" IsExpanded="True">
+            <DataGrid x:Name="SummarryDataGrid">
+                <DataGridTemplateColumn Header="Title" Width="SizeToCells" IsReadOnly="True">
+            </DataGrid>        
+        </Expander>
     </Grid>
 </Window>

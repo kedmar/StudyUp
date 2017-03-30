@@ -80,18 +80,23 @@ namespace StudyUpController
                 m = mList[i];
                 if (m.Universrty == university) count++;
                 if (m.Course == course) count++;
-                if (m.UploaderMail == uploaderMail) count++;
+                if (m.Uploader == uploaderMail) count++;
                 if (m.Title == title) count++;
                 if (m.Topic == topic) count++;
                 for (j = 0; j < m.Tags.Count(); j++)
                 {
-                    if (m.Tags[j] == )
+                    for (l = 0; l < tags.Count(); l++)
+                        if (m.Tags[j] == tags[l]) count++;
                 }
-                
+                for (j = 0; j < m.Topic.Count(); j++)
+                {
+                    for (l = 0; l < topic.Count(); l++)
+                        if (m.Topic[j] == topic[l]) count++;
+                }
+                if (m.Category == category) count++;
+                if (count > 0) ret.Add(m, count);
             }
-
-
-            return; 
+            return ret; 
         }
 
 

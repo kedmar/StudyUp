@@ -18,7 +18,7 @@ namespace StudyUpController
         Dictionary<Material, double> RetreiveMaterialsSimpleSearch(string query);
         Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string university, string courseNo,
            string courseName, string uploaderMail, string title, List<string> topic, List<string>
-            tags, string category, bool isPrintedOnly);
+            tags, string category, bool isPrinter);
         bool UploadMaterial(Material newMaterial);
         List<string> GetAllUniversities();
         List<Courses> GetAllCourses();
@@ -26,6 +26,6 @@ namespace StudyUpController
         List<string> GetAllTopics();
         List<string> GetAllTags();
         List<string> GetAllCategories();
-        List<Material> RetreiveMaterialsAdvancedSearch(string tag);
+        Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string tag);
     }
 }
