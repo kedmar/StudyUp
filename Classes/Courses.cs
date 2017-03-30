@@ -8,6 +8,16 @@ namespace Classes
 {
     public class Courses
     {
+        private string text1;
+        private string text2;
+
+        public Courses(string university, string courseNo, string courseName)
+        {
+            this.CourseNo = courseNo;
+            this.CourseName = courseName;
+            University = university;
+        }
+
         public string CourseNo { get; set; }
         public string CourseName { get; set; }
         public string University { get; set; }
