@@ -300,7 +300,7 @@ namespace StudyUpModel
             return record_list;
         }
 
-        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
+        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter, DateTime uploadDateTime)
         {
             List<Material> results = new List<Material>();
 
