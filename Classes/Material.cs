@@ -9,7 +9,7 @@ namespace Classes
     public class Material
     {
        
-        public Material(string university, Courses course, string title, List<string> topic, List<string> tags, string category, bool printed, DateTime uploaded, string path)
+        public Material(string university, Courses course, string title, List<string> topic, List<string> tags, string category, bool printed, string path)
         {
             Universrty = university;
             Course = course;
@@ -18,7 +18,6 @@ namespace Classes
             Tags = tags;
             SetCategory(category);
             IsPrinted = printed;
-            UploadedDateTime = uploaded;
             File = path;
 
         }
@@ -26,7 +25,7 @@ namespace Classes
         public int ID { get; set; }
         public string Universrty { get; set; }
         public Courses Course { get; set; }
-        public string UploaderMail { get; set; }
+        public string Uploader { get; set; }
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
