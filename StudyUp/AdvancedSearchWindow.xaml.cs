@@ -33,18 +33,12 @@ namespace StudyUp
 
         ObservableCollection<string> _suggestion;
 
+        List<string> Tags;
 
-        public string University { get; set; }
-        public Courses Course { get; set; }
-
-        public string QTitle { get; set; }
-
-        public List<string> Topic { get; set; }
-        public List<string> Tags { get; set; }
-        public List<string> Categories { get; set; }
 
         Field lastFieldEditted = Field.None;
 
+        Material materialQuery;
 
 
 
@@ -58,13 +52,35 @@ namespace StudyUp
             _tags = new ObservableCollection<string>(_controller.GetAllTags());
             _categories = new ObservableCollection<string>(_controller.GetAllCategories());
             categoryCmbBx.ItemsSource = _categories;
+            Tags = new List<string>();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            University = universityTxtBx.Text;
-            Course = new Courses(University, courseNoTxtBx.Text, courseNameTxtBx.Text);
-            QTitle = titleTxtBx.Text;
+            string university = universityTxtBx.Text;
+            string courseNo = courseNoTxtBx.Text;
+            string courseName = courseNameTxtBx.Text;
+            string title = titleTxtBx.Text;
+            List<string> topics = new List<string>(topicTxtBx.Text.Split(' '));
+            List<string> tags = new List<string>(tagsTxtBx.Text.Split(' '));
+            string category = (string) categoryCmbBx.SelectedItem;
+            CategoryEnum categoryEnum;
+            if (category == "AudioClass")
+                categoryEnum = CategoryEnum.AudioClass;
+            if (category == "FormulasPage")
+                categoryEnum = CategoryEnum.FormulasPage;
+            if (category == "Lecture")
+                categoryEnum = CategoryEnum.Lecture;
+            if (category == "Practice")
+                categoryEnum = CategoryEnum.Practice;
+            if (category == "Summary")
+                categoryEnum = CategoryEnum.Summary;
+            if (category == "Tests")
+                categoryEnum = CategoryEnum.Tests;
+            else
+                categoryEnum = CategoryEnum.VideoClass;
+
+            materialQuery = new Material();
 
         }
 

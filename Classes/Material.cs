@@ -68,7 +68,7 @@ namespace Classes
         public string File { get; set; }
         public int score { get; set; }
 
-        private string getCategoryEnum()
+        public string getCategoryEnum()
         {
             if (Category == CategoryEnum.AudioClass)
                 return "AudioClass";
