@@ -63,9 +63,43 @@ namespace StudyUpController
             return m_model.GetAllUploadersNames();
         }
 
-        public Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter, DateTime uploadDateTime)
+
+
+        public Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter)
         {
-            return m_model.RetreiveMaterialsAdvancedSearch(university, courseNo, courseName, uploaderMail, title, topic, tags, category, isPrinter, uploadDateTime);
+
+            int i, j, l, count;
+            Material m;
+            Courses course = new Courses(university, courseNo, courseName);
+            Dictionary<Material, double> ret = new Dictionary<Material, double>();
+            List<Material> mList = m_model.RetreiveMaterialsAdvancedSearch(university, course, uploaderMail,
+                title, topic, tags, category, isPrinter);
+            for (i = 0; i < mList.Count(); i++)
+            {
+                count = 0;
+                m = mList[i];
+                if (m.Universrty == university) count++;
+                if (m.Course == course) count++;
+                if (m.UploaderMail == uploaderMail) count++;
+                if (m.Title == title) count++;
+                if (m.Topic == topic) count++;
+                for (j = 0; j < m.Tags.Count(); j++)
+                {
+                    if (m.Tags[j] == )
+                }
+                
+            }
+
+
+            return; 
+        }
+
+
+        public Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string tag)
+        {
+            List<string> tagList = new List<string>();
+            tagList.Add(tag);
+            return RetreiveMaterialsAdvancedSearch(null, null, null, null, null, null, tagList, null, false);
         }
 
         public Dictionary<Material, double> RetreiveMaterialsSimpleSearch(string query)
