@@ -83,6 +83,7 @@ namespace StudyUpController
                 for (j = 0; j < words.Count(); j++)
                 {
                     if (m.Course.CourseName == words[j]) count++;
+                    if (m.)
                 }
             }
 

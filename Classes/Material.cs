@@ -14,7 +14,7 @@ namespace Classes
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
-        public CategoryEnum Catgory { get; set; }
+        public CategoryEnum Category { get; set; }
         public bool IsPrinted { get; set; }
         public DateTime UpldoadeDateTime { get; set; }
 
