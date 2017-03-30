@@ -455,15 +455,46 @@ namespace StudyUpModel
 
         private bool InsertFileTags(Material newMat)
         {
+            List<string> tags = GetTagsFromDatabase();
+            List<string> newTags = new List<string>();
             foreach (string t in newMat.Topic)
             {
-                InsertTag(newMat.ID, t);
+                if (!tags.Contains(t))
+                    newTags.Add(t);
+                if (!InsertDocTag(newMat.ID, t))
+                    return false;
+            }
+            foreach (string t in tags)
+            {
+                InsertTag(t);
+                if (!InsertDocTag(newMat.ID, t))
+                    return false;
             }
 
             return true;
         }
 
-        private bool InsertTag(int ID, string t)
+        private bool InsertTag(string t)
+        {
+            if (!dbConnect())
+            {
+                return false;
+            }
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "INSERT INTO Tags ([Tag]) VALUES (?)", connection);
+
+            command.Parameters.AddWithValue("@Tag", t);
+            adapter.InsertCommand = command;
+            adapter.InsertCommand.ExecuteNonQuery();
+            dbClose();
+            return true;
+        }
+
+        private bool InsertDocTag(int ID, string t)
         {
             if (!dbConnect())
             {
