@@ -5,8 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
-        Title="StudyUp" Height="350" Width="525"   WindowState="Maximized"
-    WindowStyle="ToolWindow">
+        Title="StudyUp" Height="350" Width="525"   WindowState="Maximized">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />

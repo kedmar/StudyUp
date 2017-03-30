@@ -5,6 +5,8 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Windows;
+using StudyUpController;
+using StudyUpModel;
 
 namespace StudyUp
 {
@@ -13,5 +15,14 @@ namespace StudyUp
     /// </summary>
     public partial class App : Application
     {
+        void App_Startup(object sender, StartupEventArgs e)
+        {
+            Model model = new Model();
+            Controller controller = new Controller();
+            controller.SetModel(model);
+            MainWindow win = new StudyUp.MainWindow(controller);
+            win.Show();
+
+        }
     }
 }

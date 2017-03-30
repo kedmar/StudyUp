@@ -25,7 +25,7 @@ namespace StudyUp
         public MainWindow(IController controller)
         {
             InitializeComponent();
-            _controller = _controller;
+            _controller = controller;
         }
 
         private void MenuItem_Click(object sender, RoutedEventArgs e)

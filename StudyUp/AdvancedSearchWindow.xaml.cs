@@ -13,7 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using StudyUpController;
 using System.Collections.ObjectModel;
-using Classes
+using Classes;
 
 namespace StudyUp
 {
@@ -29,6 +29,18 @@ namespace StudyUp
         ObservableCollection<string> _tags;
         ObservableCollection<string> _categories;
 
+        public string University { get; set; }
+        public Courses Course { get; set; }
+
+
+        public string QTitle { get; set; }
+
+        public List<string> Topic { get; set; }
+        public List<string> Tags { get; set; }
+        public List<string> Categories { get; set; }
+
+
+
 
 
         public AdvancedSearchWindow(IController controller)
@@ -40,6 +52,14 @@ namespace StudyUp
             _topics = new ObservableCollection<string>(_controller.GetAllTopics());
             _tags = new ObservableCollection<string>(_controller.GetAllTags());
             _categories = new ObservableCollection<string>(_controller.GetAllCategories());
+        }
+
+        private void Search_Click(object sender, RoutedEventArgs e)
+        {
+            University = universityTxtBx.Text;
+            Course = new Courses(University, courseNoTxtBx.Text, courseNameTxtBx.Text);
+            QTitle = titleTxtBx.Text;
+
         }
     }
 }
