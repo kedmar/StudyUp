@@ -107,6 +107,9 @@ namespace StudyUpController
             return m_model.UploadMaterial(newMaterial);
         }
 
-       
+        public List<Material> RetreiveMaterialsAdvancedSearch(string tag)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
