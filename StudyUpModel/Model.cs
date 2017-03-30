@@ -300,11 +300,11 @@ namespace StudyUpModel
             return record_list;
         }
 
-        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
+        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter, DateTime uploadDateTime)
         {
             List<Material> results = new List<Material>();
 
-
+            //TODO: add to OR query for each non-empty param
 
             return results;
         }
@@ -352,23 +352,146 @@ namespace StudyUpModel
             
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                if (!IDs.Contains(Convert.ToInt32(ds.Tables[0].Rows[i][0])))
+                int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!IDs.Contains(currentID))
                 {
-                    string university;
-                    Courses course;
-                    string uploaderMail;
+                    string university = GetDocUniversity(currentID);
+                    Courses course = GetDocCourse(currentID, university);
                     string title = ds.Tables[0].Rows[i][5].ToString();
-                    List<string> topic = GetDocTopics(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    List<string> tags = GetDocTags(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    CategoryEnum category = (ds.Tables[0].Rows[i][2].ToString();
+                    List<string> topic = GetDocTopics(currentID);
+                    List<string> tags = GetDocTags(currentID);
+                    string category = ds.Tables[0].Rows[i][2].ToString();
                     bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
-                    DateTime uploaded = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
                     string path = ds.Tables[0].Rows[i][1].ToString();
-                    Material mat = new Material(university, course, uploaderMail, title, topic, tags, category);
-                    mat.ID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                    Material mat = new Material(university, course, title, topic, tags, category, printed, path);
+                    mat.ID = currentID;
+                    mat.Uploader = currentUser;
+                    mat.UploadedDateTime = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
+                    results.Add(mat);
+                    IDs.Add(currentID);
 
                 }
             }
+        }
+
+        private Courses GetDocCourse(int docID, string university)
+        {
+            int classID = GetClassID(docID);
+            string className = "";
+            if (classID != 0)
+            {
+                Dictionary<int, string> classes = getClassNames(classID);
+                if (classes.ContainsKey(classID))
+                    className = classes[classID];
+            }
+            Courses course = new Courses(university, classID.ToString(), className);
+            return course;
+        }
+
+        private Dictionary<int, string> getClassNames(int classID)
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT * FROM Classes", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            Dictionary<int, string> record_list = new Dictionary<int, string>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int key = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                string field = ds.Tables[0].Rows[i][2].ToString();
+                if (!record_list.ContainsKey(key))
+                    record_list.Add(key, field);
+            }
+            dbClose();
+            return record_list;
+        }
+
+        private int GetClassID(int docID)
+        {
+            if (!dbConnect())
+                return 0;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT ClassID FROM Class-Doc WHERE [DocID] = '" + docID + "'", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            int classID = 0;
+            if (ds.Tables[0].Rows.Count > 0)
+                classID = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            dbClose();
+            return classID;
+        }
+
+        private string GetDocUniversity(int docID)
+        {
+            int uniID = GetUniversityID(docID);
+            if (uniID == 0)
+                return "";
+            Dictionary<int, string> unis = getUniversityNames();
+            string uniName = "";
+            if (unis.ContainsKey(uniID))
+                uniName = unis[uniID];
+            return uniName;
+        }
+
+        private Dictionary<int, string> getUniversityNames()
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT * FROM Universities", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            Dictionary<int, string> record_list = new Dictionary<int, string>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int key = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                string field = ds.Tables[0].Rows[i][1].ToString();
+                if (!record_list.ContainsKey(key))
+                    record_list.Add(key, field);
+            }
+            dbClose();
+            return record_list;
+        }
+
+        private int GetUniversityID(int docID)
+        {
+            if (!dbConnect())
+                return 0;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT UniversityID FROM Class-Doc WHERE [DocID] = '" + docID + "'", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            int uniID = 0;
+            if (ds.Tables[0].Rows.Count > 0)
+                uniID = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            dbClose();
+            return uniID;
         }
 
         private List<string> GetDocTags(int docID)
@@ -381,9 +504,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT * FROM Documents WHERE [Path] = '" + query + "'", connection);
-
-            command.Parameters.AddWithValue("@Tag", t);
+                "SELECT * FROM Documents WHERE [ID] = '" + docID + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -400,7 +521,65 @@ namespace StudyUpModel
 
         private List<string> GetDocTopics(int docID)
         {
-            throw new NotImplementedException();
+            List<int> topicIDs = getTopicIDs(docID);
+            Dictionary<int, string> topics = getTopicNames();
+            List<string> topicNames = new List<string>();
+            foreach (int id in topicIDs)
+                if(topics.ContainsKey(id))
+                    topicNames.Add(topics[id]);
+            return topicNames;
+        }
+
+        private Dictionary<int, string> getTopicNames()
+        {
+
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT * FROM Topics", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            Dictionary<int, string> record_list = new Dictionary<int, string>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int key = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                string field = ds.Tables[0].Rows[i][1].ToString();
+                if (!record_list.ContainsKey(key))
+                    record_list.Add(key,field);
+            }
+            dbClose();
+            return record_list;
+        }
+
+        private List<int> getTopicIDs(int docID)
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT TopicID FROM Doc-Topic WHERE [DocumentID] = '" + docID + "'", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            List<int> record_list = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int field = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!record_list.Contains(field))
+                    record_list.Add(field);
+            }
+            dbClose();
+            return record_list;
         }
 
         public bool UploadMaterial(Material newMaterial)
@@ -460,7 +639,7 @@ namespace StudyUpModel
 
             command.Parameters.AddWithValue("@ID", newMat.ID);
             command.Parameters.AddWithValue("@Path", dataPath + "\\" + Convert.ToInt32(fileCount));
-            command.Parameters.AddWithValue("@Type", newMat.CategoryString);
+            command.Parameters.AddWithValue("@Type", newMat.Category);
             command.Parameters.AddWithValue("@HandWrite", newMat.IsPrinted);
             command.Parameters.AddWithValue("@Score", newMat.score);
             command.Parameters.AddWithValue("@Title", newMat.Title);

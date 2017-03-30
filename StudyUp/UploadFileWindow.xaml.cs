@@ -64,10 +64,7 @@ namespace StudyUp
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-            if () ;
-
-
-
+         
             List<string> tags = new List<string>();
             List<string> topic = new List<string>();
             string[] words;
@@ -84,7 +81,8 @@ namespace StudyUp
             topic = words.ToList<string>();
             string university = universityTxtBx.Text;
             Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
-            Material material = new Material(university, course, titleTxtBx.Text, topic, tags, categoryCmbBx.Text, isPrintedCheckBox.IsChecked, DateTime.Now, src_path);
+            Material material = new Material(university, course, titleTxtBx.Text, topic, tags, categoryCmbBx.Text, (isPrintedCheckBox.IsChecked == true), src_path);
+            DialogResult = true;
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)
