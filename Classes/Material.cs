@@ -8,17 +8,11 @@ namespace Classes
 {
     public class Material
     {
-        /*public Courses(string university, string courseNo, string courseName)
-        {
-            this.CourseNo = courseNo;
-            this.CourseName = courseName;
-            University = university;
-        }*/
-        public Material(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool printed, DateTime uploaded, string path)
+       
+        public Material(string university, Courses course, string title, List<string> topic, List<string> tags, string category, bool printed, DateTime uploaded, string path)
         {
             Universrty = university;
             Course = course;
-            UploaderMail = uploaderMail;
             Title = title;
             Topic = topic;
             Tags = tags;
@@ -36,7 +30,7 @@ namespace Classes
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
-        private CategoryEnum Category { get; set; }
+        public CategoryEnum Category { get; set; }
 
         private void SetCategory(string cat)
         {
