@@ -40,8 +40,8 @@ namespace StudyUp
             ;
             if(win.ShowDialog() == true)
             {
-                _controller.RetreiveMaterialsAdvancedSearch(win.University, win.University, win.CourseNo, win.CourseName, win.Title
-                    , win.Topics, win.Tags, win.Category, win.IsPrinted, null);
+                Dictionary<Material, double> results = _controller.RetreiveMaterialsAdvancedSearch(win.University, win.University, win.CourseNo, win.CourseName, win.Title
+                    , win.Topics, win.Tags, win.Category, win.IsPrinted, DateTime.Now);
             }
         }
     }
