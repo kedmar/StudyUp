@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using StudyUpController;
 
 namespace StudyUp
 {
@@ -20,9 +21,21 @@ namespace StudyUp
     /// </summary>
     public partial class MainWindow : Window
     {
-        public MainWindow()
+        IController _controller;
+        public MainWindow(IController controller)
         {
             InitializeComponent();
+            _controller = controller;
+        }
+
+        private void MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void AdvancedSearch_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

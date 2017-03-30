@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
         Title="StudyUp" Height="350" Width="525"   WindowState="Maximized"
-    WindowStyle="None">
+    WindowStyle="ToolWindow">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -35,7 +35,7 @@
         <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center">StudyUp</Label>
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
             <Menu VerticalAlignment="Stretch">
-                <MenuItem Header="Advanced Search"/>
+                <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
                 <MenuItem Header="Upload Material"/>
             </Menu>
         </DockPanel>

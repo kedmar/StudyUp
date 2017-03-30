@@ -35,43 +35,44 @@ namespace StudyUpController
         public List<string> GetAllCategories()
         {
 
-            throw new NotImplementedException();
+            return m_model.GetAllCategories();
         }
 
         public List<Courses> GetAllCourses()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllCourses();
         }
 
         public List<string> GetAllTags()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllTags();
         }
 
         public List<string> GetAllTopics()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllTopics();
         }
 
         public List<string> GetAllUniversities()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllUniversities();
         }
 
         public List<string> GetAllUploadersMails()
         {
-            throw new NotImplementedException();
+            return m_model.GetAllUploadersMails();
         }
 
         public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
         {
-            throw new NotImplementedException();
+            return m_model.RetreiveMaterialsAdvancedSearch(university, courseNo, courseName, uploaderMail, title, topic, tags, category, isPrinter, uploadDateTime);
         }
 
         public Dictionary<Material, double> RetreiveMaterialsSimpleSearch(string query)
         {
-            int i, j, count;
+            int i, j, l, count;
             Material m;
+            Dictionary<Material, double> ret = new Dictionary<Material, double>();
             string lowerQuery = query.ToLower();
             char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
             string[] words = lowerQuery.Split(delimiterChars);
@@ -83,15 +84,22 @@ namespace StudyUpController
                 for (j = 0; j < words.Count(); j++)
                 {
                     if (m.Course.CourseName == words[j]) count++;
+                    for (l = 0; l < m.Tags.Count(); l++)
+                        if (m.Tags[l].Equals(words[j])) count++;
+                    for (l = 0; l < m.Topic.Count(); l++)
+                        if (m.Topic[l].Equals(words[j])) count++;
+                    if (m.Topic.Equals(words[j])) count++;
+                    if (m.Universrty.Equals(words[j])) count++;
                 }
+                if (count > 0) ret.Add(m, count);
             }
 
-            throw new NotImplementedException();
+            return ret;
         }
 
         public bool UploadMaterial(Material newMaterial)
         {
-            throw new NotImplementedException();
+            return m_model.UploadMaterial(newMaterial);
         }
     }
 }
