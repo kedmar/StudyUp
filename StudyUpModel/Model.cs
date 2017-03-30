@@ -304,7 +304,7 @@ namespace StudyUpModel
         {
             List<Material> results = new List<Material>();
 
-
+            //TODO: add to OR query for each non-empty param
 
             return results;
         }
