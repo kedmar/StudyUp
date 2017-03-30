@@ -31,7 +31,33 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
-    <Expander Header=""
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
+        <Expander Header="Summaries" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="summaryDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Lectures" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="lectureReDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Prsctices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="prscticeDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Formulas" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="formulaDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Tests" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="testDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Audios" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="audioDataGrid"></DataGrid>
+        </Expander>
+
+        <Expander Header="Video" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="videoDataGrid"></DataGrid>
+        </Expander>
     </Grid>
 </Window>

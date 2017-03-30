@@ -1,18 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Classes;
 using StudyUpController;
+using System.Collections.ObjectModel;
+using System;
 
 namespace StudyUp
 {
@@ -24,6 +15,15 @@ namespace StudyUp
         private Dictionary<Material, double> results;
         private IController _controller;
 
+        private ObservableCollection<string> summeriesRes;
+        private ObservableCollection<string> lectursRes;
+        private ObservableCollection<string> prscticesRes;
+        private ObservableCollection<string> formulasRes;
+        private ObservableCollection<string> testsRes;
+        private ObservableCollection<string> audioRes;
+        private ObservableCollection<string> videoRes;
+
+
         public PresentResults()
         {
             InitializeComponent();
@@ -33,6 +33,19 @@ namespace StudyUp
         {
             this._controller = _controller;
             this.results = results;
+
+            SplitAndSortResults();
+        }
+
+        private void SplitAndSortResults()
+        {
+            foreach(Material material in results.Keys)
+            {
+                switch (material.Category)
+                {
+                     
+                }
+            }
         }
     }
 }
