@@ -8,6 +8,27 @@ namespace Classes
 {
     public class Material
     {
+        /*public Courses(string university, string courseNo, string courseName)
+        {
+            this.CourseNo = courseNo;
+            this.CourseName = courseName;
+            University = university;
+        }*/
+        public Material(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool printed, DateTime uploaded, string path)
+        {
+            Universrty = university;
+            Course = course;
+            UploaderMail = uploaderMail;
+            Title = title;
+            Topic = topic;
+            Tags = tags;
+            Category = category;
+            IsPrinted = printed;
+            UploadedDateTime = uploaded;
+            File = path;
+
+        }
+
         public int ID { get; set; }
         public string Universrty { get; set; }
         public Courses Course { get; set; }
@@ -42,7 +63,7 @@ namespace Classes
             }
         }
         public bool IsPrinted { get; set; }
-        public DateTime UpldoadeDateTime { get; set; }
+        public DateTime UploadedDateTime { get; set; }
         //file = file path
         public string File { get; set; }
         public int score { get; set; }

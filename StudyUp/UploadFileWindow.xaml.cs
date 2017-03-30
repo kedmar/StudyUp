@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
+using Classes;
 
 namespace StudyUp
 {
@@ -37,7 +38,17 @@ namespace StudyUp
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
-
+            string lowerQuery = tagsTxtBx.Text.ToLower();
+            char[] delimiterChars = { ',', '.', ' ' };
+            string[] words = lowerQuery.Split(delimiterChars);
+            List<string> tags = words.ToList<string>();
+            lowerQuery = topicTxtBx.Text.ToLower();
+            words = lowerQuery.Split(delimiterChars);
+            List<string> topic = words.ToList<string>();
+            string university = universityTxtBx.Text;
+            Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
+            CategoryEnum category = 
+            Material material = new Material(university, userEmailTxtBx.Text, titleTxtBx.Text, topic, tags, category);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

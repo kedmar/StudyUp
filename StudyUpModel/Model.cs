@@ -302,12 +302,70 @@ namespace StudyUpModel
 
         public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
         {
-            throw new NotImplementedException();
+            List<Material> results = new List<Material>();
+
+
+
+            return results;
         }
 
         public List<Material> RetreiveMaterialsSimpleSearch(string[] queryWords)
         {
-            throw new NotImplementedException();
+            List<Material> results = new List<Material>();
+            List<int> IDs = new List<int>();
+
+            for(int i = 0; i < queryWords.Length; i++)
+            {
+                SimpleSearch(results, IDs, queryWords[i]);
+            }
+
+            return results;
+        }
+
+        private void SimpleSearch(List<Material> results, List<int> IDs, string query)
+        {
+            DataSet ds = new DataSet();
+            int queryNum;
+            bool isNum = int.TryParse(query, out queryNum);
+            try
+            {
+                if (!dbConnect())
+                    return;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+
+                string cmdStr = "SELECT * FROM Documents WHERE [Path] = '" + query + "' OR [Type] = '" + query + "' OR [Title] = '" + query + "'";
+                if (isNum)
+                    cmdStr = " OR [ID] = '" + queryNum + "'";
+
+                //Create the InsertCommand.
+                command = new OleDbCommand(cmdStr, connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                dbClose();
+            }
+            catch(Exception e)
+            {
+                return;
+            }
+            
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                if (!IDs.Contains(Convert.ToInt32(ds.Tables[0].Rows[i][0])))
+                {
+                    string university;
+                    Courses course;
+                    string uploaderMail;
+                    string title;
+                    List<string> topic;
+                    List<string> tags;
+                    CategoryEnum category;
+                    Material mat = new Material(university, course, uploaderMail, title, topic, tags, category);
+                    mat.ID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+
+                }
+            }
         }
 
         public bool UploadMaterial(Material newMaterial)
