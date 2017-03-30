@@ -70,8 +70,9 @@ namespace StudyUpController
 
         public Dictionary<Material, double> RetreiveMaterialsSimpleSearch(string query)
         {
-            int i, j, count;
+            int i, j, l, count;
             Material m;
+            Dictionary<Material, double> ret = new Dictionary<Material, double>();
             string lowerQuery = query.ToLower();
             char[] delimiterChars = { ' ', ',', '.', ':', '\t' };
             string[] words = lowerQuery.Split(delimiterChars);
@@ -82,12 +83,19 @@ namespace StudyUpController
                 count = 0;
                 for (j = 0; j < words.Count(); j++)
                 {
+                    Predicate<string> p;
                     if (m.Course.CourseName == words[j]) count++;
-                    if (m.)
+                    for (l = 0; l < m.Tags.Count(); l++)
+                        if (m.Tags[l].Equals(words[j])) count++;
+                    for (l = 0; l < m.Topic.Count(); l++)
+                        if (m.Topic[l].Equals(words[j])) count++;
+                    if (m.Topic.Equals(words[j])) count++;
+                    if (m.Universrty.Equals(words[j])) count++;
                 }
+                if (count > 0) ret.Add(m, count);
             }
 
-            throw new NotImplementedException();
+            return ret;
         }
 
         public bool UploadMaterial(Material newMaterial)
