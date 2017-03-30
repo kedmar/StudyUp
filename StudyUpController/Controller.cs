@@ -83,7 +83,6 @@ namespace StudyUpController
                 count = 0;
                 for (j = 0; j < words.Count(); j++)
                 {
-                    Predicate<string> p;
                     if (m.Course.CourseName == words[j]) count++;
                     for (l = 0; l < m.Tags.Count(); l++)
                         if (m.Tags[l].Equals(words[j])) count++;
