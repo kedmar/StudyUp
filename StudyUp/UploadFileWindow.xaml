@@ -65,8 +65,12 @@
         <TextBox x:Name="userEmailTxtBx" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="7" HorizontalAlignment="Stretch" Grid.RowSpan="2"/>
 
 
-        <Label Grid.Row="9" Grid.ColumnSpan="4  " Grid.Column="6" HorizontalAlignment="Left">Printed Only?</Label>
-        <CheckBox x:Name="isPrintedOnlyCheckBox" Grid.Row="9" Grid.ColumnSpan="1" Grid.Column="8" VerticalAlignment="Center" />
+        <Label Grid.Row="6" Grid.ColumnSpan="6  " Grid.Column="6" HorizontalAlignment="Left">Caetgory:</Label>
+        <ComboBox x:Name="categoryCmbBx" Grid.Row="7" Grid.Column="6" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+
+
+        <Label Grid.Row="9" Grid.ColumnSpan="4  " Grid.Column="6" HorizontalAlignment="Left">Printed? (not hand-written)</Label>
+        <CheckBox x:Name="isPrintedCheckBox" Grid.Row="9" Grid.ColumnSpan="1" Grid.Column="8" VerticalAlignment="Center" />
         <Button Grid.Row="11" Grid.Column="6" Click="Upload_Click">Upload</Button>
 
         <Button Grid.Row="13" Grid.Column="3" Click="Submit_Click">Submit</Button>
