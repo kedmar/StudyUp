@@ -4,15 +4,17 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{85D7F0B2-A6CF-4EFE-BC52-E820E02F9601}</ProjectGuid>
-    <OutputType>Library</OutputType>
+    <ProjectGuid>{6CED7931-DD66-4406-AC29-5B611B969DD4}</ProjectGuid>
+    <OutputType>Exe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>StudyUpController</RootNamespace>
-    <AssemblyName>StudyUpController</AssemblyName>
+    <RootNamespace>Program</RootNamespace>
+    <AssemblyName>Program</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -22,6 +24,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -38,22 +41,30 @@
     <Reference Include="System.Data" />
     <Reference Include="System.Net.Http" />
     <Reference Include="System.Xml" />
-    <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Controller.cs" />
-    <Compile Include="DocxReader.cs" />
-    <Compile Include="IController.cs" />
+    <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Classes\Classes.csproj">
       <Project>{155db85f-be1c-4a6c-9c58-cbebf04a56fd}</Project>
       <Name>Classes</Name>
     </ProjectReference>
+    <ProjectReference Include="..\StudyUpController\StudyUpController.csproj">
+      <Project>{85d7f0b2-a6cf-4efe-bc52-e820e02f9601}</Project>
+      <Name>StudyUpController</Name>
+    </ProjectReference>
     <ProjectReference Include="..\StudyUpModel\StudyUpModel.csproj">
       <Project>{eb401a9b-b308-47d3-a10b-d097945da9b0}</Project>
       <Name>StudyUpModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudyUp\StudyUp.csproj">
+      <Project>{0ee752fa-8598-4fd4-8477-f8467f8dd5cc}</Project>
+      <Name>StudyUp</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
