@@ -64,16 +64,27 @@ namespace StudyUp
 
         private void Submit_Click(object sender, RoutedEventArgs e)
         {
+            if () ;
+
+
+
+            List<string> tags = new List<string>();
+            List<string> topic = new List<string>();
+            string[] words;
             string lowerQuery = tagsTxtBx.Text.ToLower();
             char[] delimiterChars = { ',', '.', ' ' };
-            string[] words = lowerQuery.Split(delimiterChars);
-            List<string> tags = words.ToList<string>();
+            if(lowerQuery != null)
+            {
+                words = lowerQuery.Split(delimiterChars);
+                tags = words.ToList<string>();
+            }
+            
             lowerQuery = topicTxtBx.Text.ToLower();
             words = lowerQuery.Split(delimiterChars);
-            List<string> topic = words.ToList<string>();
+            topic = words.ToList<string>();
             string university = universityTxtBx.Text;
             Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
-            Material material = new Material(university, userEmailTxtBx.Text, titleTxtBx.Text, topic, tags, "categoryCmbBx.Text", isPrintedCheckBox.IsChecked, DateTime.Now, src_path);
+            Material material = new Material(university, course, titleTxtBx.Text, topic, tags, categoryCmbBx.Text, isPrintedCheckBox.IsChecked, DateTime.Now, src_path);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

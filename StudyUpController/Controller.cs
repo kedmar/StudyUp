@@ -63,7 +63,7 @@ namespace StudyUpController
             return m_model.GetAllUploadersNames();
         }
 
-        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category, bool isPrinter, DateTime uploadDateTime)
+        public Dictionary<Material, double> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter, DateTime uploadDateTime)
         {
             return m_model.RetreiveMaterialsAdvancedSearch(university, courseNo, courseName, uploaderMail, title, topic, tags, category, isPrinter, uploadDateTime);
         }
