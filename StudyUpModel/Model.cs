@@ -352,20 +352,23 @@ namespace StudyUpModel
             
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                if (!IDs.Contains(Convert.ToInt32(ds.Tables[0].Rows[i][0])))
-                {//TODO
-                    string university = GetDocUniversity(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    Courses course = GetDocCourse(Convert.ToInt32(ds.Tables[0].Rows[i][0]), university);
+                int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!IDs.Contains(currentID))
+                {
+                    string university = GetDocUniversity(currentID);
+                    Courses course = GetDocCourse(currentID, university);
                     string title = ds.Tables[0].Rows[i][5].ToString();
-                    List<string> topic = GetDocTopics(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
-                    List<string> tags = GetDocTags(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
+                    List<string> topic = GetDocTopics(currentID);
+                    List<string> tags = GetDocTags(currentID);
                     string category = ds.Tables[0].Rows[i][2].ToString();
                     bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
                     string path = ds.Tables[0].Rows[i][1].ToString();
                     Material mat = new Material(university, course, title, topic, tags, category, printed, path);
-                    mat.ID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                    mat.ID = currentID;
                     mat.Uploader = currentUser;
                     mat.UploadedDateTime = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
+                    results.Add(mat);
+                    IDs.Add(currentID);
 
                 }
             }
