@@ -316,6 +316,9 @@ namespace StudyUpModel
             //insert to class-doc table
             if (!InsertFileClass(newMaterial))
                 return false;
+            //insert to topic-doc table
+            if (!InsertFileTopics(newMaterial))
+                return false;
             //insert to file-tags table
             if (!InsertFileTags(newMaterial))
                 return false;
@@ -333,16 +336,15 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO Documents ([ID], [Path], [Type], [HandWrite], [Score], [Title], [UploadDate], [TopicID]) VALUES (?, ?, ?, ?, ?, ?, ?, ?)", connection);
+                "INSERT INTO Documents ([ID], [Path], [Type], [HandWrite], [Score], [Title], [UploadDate]) VALUES (?, ?, ?, ?, ?, ?, ?)", connection);
 
-            command.Parameters.AddWithValue("@Path", data[0]);
-            command.Parameters.AddWithValue("@ID", data[2]);
-            command.Parameters.AddWithValue("@Type", data[1]);
-            command.Parameters.AddWithValue("@HandWrite", data[3]);
-            command.Parameters.AddWithValue("@Score", data[0]);
-            command.Parameters.AddWithValue("@Title", data[2]);
-            command.Parameters.AddWithValue("@UploadDate", data[1]);
-            command.Parameters.AddWithValue("@TopicID", data[3]);
+            command.Parameters.AddWithValue("@ID", newMat.ID);
+            command.Parameters.AddWithValue("@Path", newMat.File);
+            command.Parameters.AddWithValue("@Type", newMat.CategoryString);
+            command.Parameters.AddWithValue("@HandWrite", newMat.IsPrinted);
+            command.Parameters.AddWithValue("@Score", newMat.score);
+            command.Parameters.AddWithValue("@Title", newMat.Title);
+            command.Parameters.AddWithValue("@UploadDate", DateTime.Now);
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             dbClose();
@@ -355,6 +357,11 @@ namespace StudyUpModel
         }
 
         private bool InsertFileClass(Material newMaterial)
+        {
+            throw new NotImplementedException();
+        }
+
+        private bool InsertFileTopics(Material newMaterial)
         {
             throw new NotImplementedException();
         }
