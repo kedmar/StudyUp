@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Forms;
 using Classes;
+using System.Collections.ObjectModel;
+using StudyUpController;
 
 namespace StudyUp
 {
@@ -22,9 +24,33 @@ namespace StudyUp
     public partial class UploadFileWindow : Window
     {
         string src_path;
-        public UploadFileWindow()
+        
+
+        Controller _controller;
+        ObservableCollection<string> _universities;
+        ObservableCollection<Courses> _courses;
+        ObservableCollection<string> _topics;
+        ObservableCollection<string> _tags;
+        ObservableCollection<string> _categories;
+
+        ObservableCollection<string> _suggestion;
+
+        public List<string> Topic { get; set; }
+        public List<string> Tags { get; set; }
+
+        Field lastFieldEditted = Field.None;
+
+
+        public UploadFileWindow(IController controller)
         {
             InitializeComponent();
+            controller = _controller;
+            _universities = new ObservableCollection<string>(_controller.GetAllUniversities());
+            _courses = new ObservableCollection<Courses>(_controller.GetAllCourses());
+            _topics = new ObservableCollection<string>(_controller.GetAllTopics());
+            _tags = new ObservableCollection<string>(_controller.GetAllTags());
+            _categories = new ObservableCollection<string>(_controller.GetAllCategories());
+            categoryCmbBx.ItemsSource = _categories;
         }
 
         private void Upload_Click(object sender, RoutedEventArgs e)
@@ -47,8 +73,7 @@ namespace StudyUp
             List<string> topic = words.ToList<string>();
             string university = universityTxtBx.Text;
             Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
-            CategoryEnum category = 
-            Material material = new Material(university, userEmailTxtBx.Text, titleTxtBx.Text, topic, tags, category);
+            Material material = new Material(university, userEmailTxtBx.Text, titleTxtBx.Text, topic, tags, "categoryCmbBx.Text", isPrintedCheckBox.IsChecked, DateTime.Now, src_path);
         }
 
         private void Cancel_Click(object sender, RoutedEventArgs e)

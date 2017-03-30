@@ -33,14 +33,21 @@ namespace StudyUp
 
         ObservableCollection<string> _suggestion;
 
-        List<string> Tags;
+        public List<string> Tags { get; private set; }
 
 
         Field lastFieldEditted = Field.None;
 
-        Material materialQuery;
+        public Material materialQuery;
 
+        bool suggestionTaken = false;
 
+        public string University { get; private set; }
+        public string CourseNo { get; private set; }
+        public string CourseName { get; private set; }
+        public List<string> Topics { get; private set; }
+        public string Category { get; private set; }
+        public bool IsPrinted { get; private set; }
 
         public AdvancedSearchWindow(IController controller)
         {
@@ -57,30 +64,16 @@ namespace StudyUp
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            string university = universityTxtBx.Text;
-            string courseNo = courseNoTxtBx.Text;
-            string courseName = courseNameTxtBx.Text;
-            string title = titleTxtBx.Text;
-            List<string> topics = new List<string>(topicTxtBx.Text.Split(' '));
-            List<string> tags = new List<string>(tagsTxtBx.Text.Split(' '));
-            string category = (string) categoryCmbBx.SelectedItem;
-            CategoryEnum categoryEnum;
-            if (category == "AudioClass")
-                categoryEnum = CategoryEnum.AudioClass;
-            if (category == "FormulasPage")
-                categoryEnum = CategoryEnum.FormulasPage;
-            if (category == "Lecture")
-                categoryEnum = CategoryEnum.Lecture;
-            if (category == "Practice")
-                categoryEnum = CategoryEnum.Practice;
-            if (category == "Summary")
-                categoryEnum = CategoryEnum.Summary;
-            if (category == "Tests")
-                categoryEnum = CategoryEnum.Tests;
-            else
-                categoryEnum = CategoryEnum.VideoClass;
-
-            materialQuery = new Material();
+            University = universityTxtBx.Text;
+            CourseNo = courseNoTxtBx.Text;
+            CourseName = courseNameTxtBx.Text;
+            Title = titleTxtBx.Text;
+            Topics = new List<string>(topicTxtBx.Text.Split(' '));
+            Tags = new List<string>(tagsTxtBx.Text.Split(' '));
+            Category = (string) categoryCmbBx.SelectedItem;
+            IsPrinted = (isPrintedOnlyCheckBox.IsChecked==true);
+            DialogResult = true;
+            Close();
 
         }
 
@@ -161,6 +154,11 @@ namespace StudyUp
 
         private void tagsChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+                suggestionTaken = false;
+                return;
+            }
             String[] splittedTags = tagsTxtBx.Text.Split(' ');
             List<string> tagsToDelete = new List<string>();
             foreach (string tag in Tags)
@@ -208,6 +206,12 @@ namespace StudyUp
             {
 
             }
+            suggestionTaken = true;
+        }
+
+        private void Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }
