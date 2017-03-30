@@ -357,15 +357,68 @@ namespace StudyUpModel
                     string university;
                     Courses course;
                     string uploaderMail;
-                    string title;
-                    List<string> topic;
-                    List<string> tags;
-                    CategoryEnum category;
+                    string title = ds.Tables[0].Rows[i][5].ToString();
+                    List<string> topic = GetDocTopics(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
+                    List<string> tags = GetDocTags(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
+                    CategoryEnum category = GetCategory(ds.Tables[0].Rows[i][2].ToString());
+                    bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
+                    DateTime uploaded = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
+                    string path = ds.Tables[0].Rows[i][1].ToString();
                     Material mat = new Material(university, course, uploaderMail, title, topic, tags, category);
                     mat.ID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
 
                 }
             }
+        }
+
+        private List<string> GetDocTags(int docID)
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT * FROM Documents WHERE [Path] = '" + query + "'", connection);
+
+            command.Parameters.AddWithValue("@Tag", t);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            List<string> record_list = new List<string>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                string field = ds.Tables[0].Rows[i][0].ToString();
+                if (!record_list.Contains(field))
+                    record_list.Add(field);
+            }
+            dbClose();
+            return record_list;
+        }
+
+        private List<string> GetDocTopics(int docID)
+        {
+            throw new NotImplementedException();
+        }
+
+        private CategoryEnum GetCategory(string cat)
+        {
+            if (cat == "AudioClass")
+                return CategoryEnum.AudioClass;
+            if (cat == "FormulasPage")
+                return CategoryEnum.FormulasPage;
+            if (cat == "Lecture")
+                return CategoryEnum.Lecture;
+            if (cat == "Practice")
+                return CategoryEnum.Practice;
+            if (cat == "Summary")
+                return CategoryEnum.Summary;
+            if (cat == "Tests")
+                return CategoryEnum.Tests;
+            else
+                return CategoryEnum.VideoClass;
         }
 
         public bool UploadMaterial(Material newMaterial)
@@ -424,12 +477,12 @@ namespace StudyUpModel
                 "INSERT INTO Documents ([ID], [Path], [Type], [HandWrite], [Score], [Title], [UploadDate]) VALUES (?, ?, ?, ?, ?, ?, ?)", connection);
 
             command.Parameters.AddWithValue("@ID", newMat.ID);
-            command.Parameters.AddWithValue("@Path", newMat.File);
+            command.Parameters.AddWithValue("@Path", dataPath + "\\" + Convert.ToInt32(fileCount));
             command.Parameters.AddWithValue("@Type", newMat.CategoryString);
             command.Parameters.AddWithValue("@HandWrite", newMat.IsPrinted);
             command.Parameters.AddWithValue("@Score", newMat.score);
             command.Parameters.AddWithValue("@Title", newMat.Title);
-            command.Parameters.AddWithValue("@UploadDate", DateTime.Now);
+            command.Parameters.AddWithValue("@UploadDate", newMat.UploadedDateTime);
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             dbClose();
