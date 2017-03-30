@@ -5,8 +5,44 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
-        Title="PresenntMaterialWindow" Height="300" Width="300">
-    <Grid>
-        
+        Title="PresenntMaterialWindow" Height="300"  Width="300">
+    <Grid ShowGridLines="True">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.3*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="0.5*" />
+        </Grid.ColumnDefinitions>
+
+
+        <StackPanel Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label HorizontalAlignment="Center"> hiiiii </Label>
+            
+            <TextBlock HorizontalAlignment="Center">           
+                <Hyperlink Click="Hyperlink_Click">
+                    Click here
+                </Hyperlink>
+            </TextBlock>
+        </StackPanel>
+
+        <WebBrowser x:Name="webBrowser" Grid.Row ="1" Grid.RowSpan="6" Grid.Column="4" Grid.ColumnSpan="5" />
     </Grid>
 </Window>

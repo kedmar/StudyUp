@@ -67,7 +67,8 @@
         <Label Grid.Row="7" Grid.ColumnSpan="4  " Grid.Column="6" HorizontalAlignment="Left">Printed Only?</Label>
         <CheckBox x:Name="isPrintedOnlyCheckBox" Grid.Row="7" Grid.ColumnSpan="1" Grid.Column="8" VerticalAlignment="Center" />
 
-        <Button Grid.Row="13" Grid.Column="5" Click="Search_Click">Search</Button>
+        <Button Grid.Row="13" Grid.Column="8" Click="Search_Click" Margin="0,0,4,0">Search</Button>
+        <Button Grid.Row="13" Grid.Column="9" Click="Cancel_Click" Margin="4,0,0,0">Cancel</Button>
 
         <ListBox x:Name="suggestionsLstBx" Grid.Row="9" Grid.Column="6" Grid.RowSpan="3" Grid.ColumnSpan="4" MouseDoubleClick="suggestionPick_Click"/>
 

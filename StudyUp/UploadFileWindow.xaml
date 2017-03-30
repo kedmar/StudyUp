@@ -40,17 +40,18 @@
 
         </Grid.RowDefinitions>
         <Label Grid.Row="0" Grid.ColumnSpan="10" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Left">Please fill as many of the following fields as possible and upload your file:</Label>
+        <Label Grid.Row="1" Grid.ColumnSpan="10" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Left">Asterix (*) marks mandatory queries</Label>
 
-        <Label Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">University</Label>
+        <Label Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">*University</Label>
         <TextBox x:Name="universityTxtBx" Grid.Row="3" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
-        <Label Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">Course No.</Label>
+        <Label Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">*Course No.</Label>
         <TextBox x:Name="courseNoTxtBx" Grid.Row="5" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
-        <Label Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">Course Name</Label>
+        <Label Grid.Row="6" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">*Course Name</Label>
         <TextBox x:Name="courseNameTxtBx" Grid.Row="7" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
-        <Label Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">Title</Label>
+        <Label Grid.Row="8" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">*Title</Label>
         <TextBox x:Name="titleTxtBx" Grid.Row="9" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Stretch"/>
 
         <Label Grid.Row="10" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">Topic</Label>
@@ -61,16 +62,19 @@
         <TextBox x:Name="tagsTxtBx" Grid.Row="3" Grid.ColumnSpan="4" Grid.Column="6" HorizontalAlignment="Stretch" Grid.RowSpan="2"/>
 
 
-        <Label Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="6" HorizontalAlignment="Left">User Email</Label>
-        <TextBox x:Name="userEmailTxtBx" Grid.Row="4" Grid.ColumnSpan="4" Grid.Column="7" HorizontalAlignment="Stretch" Grid.RowSpan="2"/>
 
 
-        <Label Grid.Row="9" Grid.ColumnSpan="4  " Grid.Column="6" HorizontalAlignment="Left">Printed Only?</Label>
-        <CheckBox x:Name="isPrintedOnlyCheckBox" Grid.Row="9" Grid.ColumnSpan="1" Grid.Column="8" VerticalAlignment="Center" />
-        <Button Grid.Row="11" Grid.Column="6" Click="Upload_Click">Upload</Button>
+        <Label Grid.Row="6" Grid.ColumnSpan="6  " Grid.Column="6" HorizontalAlignment="Left">*Category</Label>
+        <ComboBox x:Name="categoryCmbBx" Grid.Row="6" Grid.Column="7" Grid.ColumnSpan="2" HorizontalAlignment="Stretch"/>
+
+
+        <Label Grid.Row="8" Grid.ColumnSpan="4  " Grid.Column="6" HorizontalAlignment="Left">*Printed? (not hand-written)</Label>
+        <CheckBox x:Name="isPrintedCheckBox" Grid.Row="8" Grid.ColumnSpan="1" Grid.Column="8" VerticalAlignment="Center" />
+
+        <Button Grid.Row="10" Grid.Column="7" Click="Upload_Click" Margin="0.4,0.4,0,50.4" Grid.RowSpan="2">Upload</Button>
 
         <Button Grid.Row="13" Grid.Column="3" Click="Submit_Click">Submit</Button>
         <Button Grid.Row="13" Grid.Column="7" Click="Cancel_Click">Cancel</Button>
-        
+
     </Grid>
 </Window>
