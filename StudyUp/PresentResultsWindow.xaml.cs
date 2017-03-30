@@ -13,6 +13,8 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Classes;
 using StudyUpController;
+using
+using System.Collections.ObjectModel;
 
 namespace StudyUp
 {
@@ -23,6 +25,16 @@ namespace StudyUp
     {
         private Dictionary<Material, double> results;
         private IController _controller;
+        ObservableCollection<Material> summariesResults;
+        ObservableCollection<Material> lecturesResults;
+        ObservableCollection<Material> practiceResults;
+        ObservableCollection<Material> formulasResults;
+        ObservableCollection<Material> testResults;
+        ObservableCollection<Material> audioResults;
+        ObservableCollection<Material> videoResults;
+
+
+
 
         public PresentResults()
         {
@@ -33,6 +45,9 @@ namespace StudyUp
         {
             this._controller = _controller;
             this.results = results;
+
+            SortResultsByCategory();
+
         }
     }
 }
