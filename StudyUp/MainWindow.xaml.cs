@@ -41,7 +41,8 @@ namespace StudyUp
             if(win.ShowDialog() == true)
             {
                 Dictionary<Material, double> results = _controller.RetreiveMaterialsAdvancedSearch(win.University, win.University, win.CourseNo, win.CourseName, win.Title
-                    , win.Topics, win.Tags, win.Category, win.IsPrinted, DateTime.Now);
+                    , win.Topics, win.Tags, win.Category, win.IsPrinted);
+                PresentResults resWin = new PresentResults(_controller, results);
             }
         }
     }

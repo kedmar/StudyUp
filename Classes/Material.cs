@@ -25,7 +25,7 @@ namespace Classes
         public int ID { get; set; }
         public string Universrty { get; set; }
         public Courses Course { get; set; }
-        public string UploaderMail { get; set; }
+        public string Uploader { get; set; }
         public string Title { get; set; }
         public List<string> Topic { get; set; }
         public List<string> Tags { get; set; }
