@@ -97,6 +97,11 @@ namespace StudyUpController
             return ret;
         }
 
+        public string GetUserMail()
+        {
+            throw new NotImplementedException();
+        }
+
         public bool UploadMaterial(Material newMaterial)
         {
             return m_model.UploadMaterial(newMaterial);
