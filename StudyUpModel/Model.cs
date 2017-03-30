@@ -92,31 +92,6 @@ namespace StudyUpModel
             connection.Close();
         }
 
-        private List<string> GetCategoriesFromDatabase()
-        {
-            if (!dbConnect())
-                return null;
-            OleDbDataAdapter adapter = new OleDbDataAdapter();
-            OleDbCommand command;
-            DataSet ds = new DataSet();
-
-            //Create the InsertCommand.
-            command = new OleDbCommand(
-                "SELECT * FROM Types", connection);
-
-            adapter.SelectCommand = command;
-            adapter.Fill(ds);
-            List<string> record_list = new List<string>();
-            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
-            {
-                string field = ds.Tables[0].Rows[i][0].ToString();
-                if (!record_list.Contains(field))
-                    record_list.Add(field);
-            }
-            dbClose();
-            return record_list;
-        }
-
         private List<Courses> GetCoursesFromDatabase()
         {
             Dictionary<int, string> UniNames = GetUniversityNamesFromDatabase();
@@ -300,13 +275,105 @@ namespace StudyUpModel
             return record_list;
         }
 
-        public List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo, string courseName, string uploaderMail, string title, List<string> topic, List<string> tags, string category, bool isPrinter, DateTime uploadDateTime)
+        public List<Material> RetreiveMaterialsAdvancedSearch(string university, Courses course, string uploader, string title, List<string> topic, List<string>
+            tags, string category, bool isPrinter)
         {
             List<Material> results = new List<Material>();
+            List<int> IDs = new List<int>();
+            bool firstparam = true; ;
+            string cmd = "SELECT * FROM Documents WHERE";
 
-            //TODO: add to OR query for each non-empty param
+            if (isPrinter)
+            {
+                cmd += " ([Type] = '" + category + "')";
+            }
+
+            if (category != null)
+                if (category != "")
+                {
+                    if (isPrinter && firstparam)
+                    {
+                        cmd += " AND (";
+                        firstparam = false;
+                    }
+                    else if (!firstparam)
+                        cmd += " OR ";
+                    cmd += "[Type] = '" + category + "'";
+                }
+
+            if (title != null)
+                if (category != "")
+                {
+                    if (isPrinter && firstparam)
+                    {
+                        cmd += " AND (";
+                        firstparam = false;
+                    }
+                    else if (!firstparam)
+                        cmd += " OR ";
+                    cmd += "[Title] = '" + title + "'";
+                }
+
+            if (isPrinter && !firstparam)
+                cmd += ")";
+
+            RunQuery(results, IDs, cmd);
+
+            bool uni = false;
+            if (university != null)
+                if(university != "")
+                {
+                    uni = true;
+
+                }
 
             return results;
+        }
+
+        private void RunQuery(List<Material> results, List<int> IDs, string cmd)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                if (!dbConnect())
+                    return;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+
+                //Create the InsertCommand.
+                command = new OleDbCommand(cmd, connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                dbClose();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!IDs.Contains(currentID))
+                {
+                    string university = GetDocUniversity(currentID);
+                    Courses course = GetDocCourse(currentID, university);
+                    string title = ds.Tables[0].Rows[i][5].ToString();
+                    List<string> topic = GetDocTopics(currentID);
+                    List<string> tags = GetDocTags(currentID);
+                    string category = ds.Tables[0].Rows[i][2].ToString();
+                    bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
+                    string path = ds.Tables[0].Rows[i][1].ToString();
+                    Material mat = new Material(university, course, title, topic, tags, category, printed, path);
+                    mat.ID = currentID;
+                    mat.Uploader = currentUser;
+                    mat.UploadedDateTime = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
+                    results.Add(mat);
+                    IDs.Add(currentID);
+
+                }
+            }
         }
 
         public List<Material> RetreiveMaterialsSimpleSearch(string[] queryWords)
@@ -807,7 +874,14 @@ namespace StudyUpModel
         }
         public List<string> GetAllCategories()
         {
-            catagories = GetCategoriesFromDatabase();
+            catagories = new List<string>();
+            catagories.Add("AudioClass");
+            catagories.Add("FormulasPage");
+            catagories.Add("Lecture");
+            catagories.Add("Practice");
+            catagories.Add("Summary");
+            catagories.Add("Tests");
+            catagories.Add("VideoClass");
             return catagories;
         }
 
