@@ -8,6 +8,24 @@ namespace Classes
 {
     public class Material
     {
+        /*public Courses(string university, string courseNo, string courseName)
+        {
+            this.CourseNo = courseNo;
+            this.CourseName = courseName;
+            University = university;
+        }*/
+        public Classes(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string> tags, CategoryEnum category)
+        {
+            Universrty = university;
+            Course = course;
+            UploaderMail = uploaderMail;
+            Title = title;
+            Topic = topic;
+            Tags = tags;
+            Category = category;
+
+        }
+
         public int ID { get; set; }
         public string Universrty { get; set; }
         public Courses Course { get; set; }
