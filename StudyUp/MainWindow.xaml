@@ -35,7 +35,7 @@
         <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
             <Menu VerticalAlignment="Stretch">
                 <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
-                <MenuItem Header="Upload Material"/>
+                <MenuItem Header="Upload Material" Click="Upload_Click"/>
             </Menu>
         </DockPanel>
         <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="10" >
@@ -45,7 +45,7 @@
             </Menu>
         </DockPanel>
         <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">Enter your query:</Label>
-        <TextBox Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="7" VerticalAlignment="Center"/>
-        <Button Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="SimpleSearch_Click">Search</Button>
+        <TextBox x:Name="queryTextBox" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" VerticalAlignment="Center"/>
+        <Button Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="SimpleSearch_Click" Margin="32,0">Search</Button>
     </Grid>
 </Window>

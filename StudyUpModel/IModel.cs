@@ -15,7 +15,7 @@ namespace StudyUpModel
         List<Material> RetreiveMaterialsSimpleSearch(string[] queryWords);
         List<Material> RetreiveMaterialsAdvancedSearch(string university, string courseNo,
            string courseName, string uploaderMail, string title, List<string> topic, List<string>
-            tags, string category, bool isPrinter);
+            tags, string category, bool isPrinter, DateTime uploadDateTime);
         bool UploadMaterial(Material newMaterial);
         List<string> GetAllUniversities();
         List<Courses> GetAllCourses();

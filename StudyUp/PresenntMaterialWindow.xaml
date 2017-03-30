@@ -15,7 +15,10 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="0.5*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="0.8*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
@@ -29,20 +32,33 @@
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="0.5*" />
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2">
-            <Label HorizontalAlignment="Center"> hiiiii </Label>
-            
-            <TextBlock HorizontalAlignment="Center">           
-                <Hyperlink Click="Hyperlink_Click">
-                    Click here
-                </Hyperlink>
-            </TextBlock>
-        </StackPanel>
+        <StackPanel x:Name="tagsLinks" Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2"></StackPanel>
 
-        <WebBrowser x:Name="webBrowser" Grid.Row ="1" Grid.RowSpan="6" Grid.Column="4" Grid.ColumnSpan="5" />
+        <WebBrowser x:Name="webBrowser" Grid.Row ="1" Grid.RowSpan="7" Grid.Column="4" Grid.ColumnSpan="6" />
+
+        <Button Grid.Row="8" Grid.Column="8" Click="LikeButton_Click" Background="Transparent" Focusable="False">
+            <Image Source="LikeImg.png" Focusable="False"></Image>
+        </Button>
+        <Label 
+           x:Name="likes" Grid.Row="8" Grid.Column="9" BorderBrush="Transparent" FontSize="6" HorizontalAlignment="Left" Margin="0,0,0,0" Foreground="#FF000000" ></Label>
+
+
+
+        <Image Grid.Row="9" Grid.Column="4" Source="profileImg.png" Margin="0,3,4,3" HorizontalAlignment="Right"></Image>
+        <Label x:Name="commen1" Grid.Row="9" Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="Coral" ></Label>
+
+        <Image Grid.Row="10" Grid.Column="4" Source="profileImg.png" Margin="0,3,4,3" HorizontalAlignment="Right"></Image>
+        <Label x:Name="commen2" Grid.Row="10" Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="Coral"></Label>
+
+        <Image Grid.Row="11" Grid.Column="4" Source="profileImg.png" Margin="0,3,4,3" HorizontalAlignment="Right"></Image>
+        <TextBox Grid.Row="11" Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="Coral" Foreground="Gray">Add your comment</TextBox>
+        
+        
+
     </Grid>
 </Window>
