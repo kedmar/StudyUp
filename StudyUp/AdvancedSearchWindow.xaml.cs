@@ -20,6 +20,8 @@ namespace StudyUp
     /// <summary>
     /// Interaction logic for AdvancedSearchWindow.xaml
     /// </summary>
+
+    public enum Field { None, University, CourseNo, CourseName, Title, Topic, Tag, IsPrinted };
     public partial class AdvancedSearchWindow : Window
     {
         Controller _controller;
@@ -29,17 +31,14 @@ namespace StudyUp
         ObservableCollection<string> _tags;
         ObservableCollection<string> _categories;
 
-        public string University { get; set; }
-        public Courses Course { get; set; }
+        ObservableCollection<string> _suggestion;
+
+        List<string> Tags;
 
 
-        public string QTitle { get; set; }
+        Field lastFieldEditted = Field.None;
 
-        public List<string> Topic { get; set; }
-        public List<string> Tags { get; set; }
-        public List<string> Categories { get; set; }
-
-
+        Material materialQuery;
 
 
 
@@ -52,14 +51,163 @@ namespace StudyUp
             _topics = new ObservableCollection<string>(_controller.GetAllTopics());
             _tags = new ObservableCollection<string>(_controller.GetAllTags());
             _categories = new ObservableCollection<string>(_controller.GetAllCategories());
+            categoryCmbBx.ItemsSource = _categories;
+            Tags = new List<string>();
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
         {
-            University = universityTxtBx.Text;
-            Course = new Courses(University, courseNoTxtBx.Text, courseNameTxtBx.Text);
-            QTitle = titleTxtBx.Text;
+            string university = universityTxtBx.Text;
+            string courseNo = courseNoTxtBx.Text;
+            string courseName = courseNameTxtBx.Text;
+            string title = titleTxtBx.Text;
+            List<string> topics = new List<string>(topicTxtBx.Text.Split(' '));
+            List<string> tags = new List<string>(tagsTxtBx.Text.Split(' '));
+            string category = (string) categoryCmbBx.SelectedItem;
+            CategoryEnum categoryEnum;
+            if (category == "AudioClass")
+                categoryEnum = CategoryEnum.AudioClass;
+            if (category == "FormulasPage")
+                categoryEnum = CategoryEnum.FormulasPage;
+            if (category == "Lecture")
+                categoryEnum = CategoryEnum.Lecture;
+            if (category == "Practice")
+                categoryEnum = CategoryEnum.Practice;
+            if (category == "Summary")
+                categoryEnum = CategoryEnum.Summary;
+            if (category == "Tests")
+                categoryEnum = CategoryEnum.Tests;
+            else
+                categoryEnum = CategoryEnum.VideoClass;
 
+            materialQuery = new Material();
+
+        }
+
+        private void universityTxtBoxChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((lastFieldEditted != Field.University || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && universityTxtBx.Text.Length > 0)
+            {
+                suggestionsLstBx.SetValue(Grid.RowProperty, 4);
+                suggestionsLstBx.SetValue(Grid.ColumnProperty, 1);
+                UpdateSuggestions(universityTxtBx.Text, _universities);
+                suggestionsLstBx.ItemsSource = _suggestion;
+                suggestionsLstBx.Visibility = Visibility.Visible;
+            }
+
+        }
+
+
+        private void courseNoChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((lastFieldEditted != Field.CourseNo || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && courseNoTxtBx.Text.Length > 0)
+            {
+                suggestionsLstBx.SetValue(Grid.RowProperty, 6);
+                suggestionsLstBx.SetValue(Grid.ColumnProperty, 1);
+                ObservableCollection<string> courseNoToPresent = new ObservableCollection<string>();
+                foreach (Courses course in _courses)
+                {
+                    courseNoToPresent.Add(String.Format("{0} | {1}", course.CourseNo, course.CourseName));
+                }
+                UpdateSuggestions(courseNoTxtBx.Text, courseNoToPresent);
+                suggestionsLstBx.ItemsSource = _suggestion;
+                suggestionsLstBx.Visibility = Visibility.Visible;
+
+            }
+        }
+
+
+
+        private void courseNameChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((lastFieldEditted != Field.CourseName || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && courseNameTxtBx.Text.Length > 0)
+            {
+                suggestionsLstBx.SetValue(Grid.RowProperty, 8);
+                suggestionsLstBx.SetValue(Grid.ColumnProperty, 1);
+                ObservableCollection<string> courseNamesToPresent = new ObservableCollection<string>();
+                foreach (Courses course in _courses)
+                {
+                    courseNamesToPresent.Add(String.Format("{0} | {1}", course.CourseName, course.CourseNo));
+                }
+                UpdateSuggestions(courseNameTxtBx.Text, courseNamesToPresent);
+                suggestionsLstBx.ItemsSource = _suggestion;
+                suggestionsLstBx.Visibility = Visibility.Visible;
+            }
+        }
+
+
+        private void UpdateSuggestions(string input, ObservableCollection<string> source)
+        {
+            _suggestion = new ObservableCollection<string>();
+            input = input.ToLower();
+            foreach (string item in source)
+            {
+                if (item.ToLower().IndexOf(input) >= 0)
+                    _suggestion.Add(item);
+            }
+        }
+
+        private void topicChanged(object sender, TextChangedEventArgs e)
+        {
+            if ((lastFieldEditted != Field.Topic || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && topicTxtBx.Text.Length > 0)
+            {
+                suggestionsLstBx.SetValue(Grid.RowProperty, 12);
+                suggestionsLstBx.SetValue(Grid.ColumnProperty, 1);
+                UpdateSuggestions(topicTxtBx.Text, _topics);
+                suggestionsLstBx.ItemsSource = _suggestion;
+                suggestionsLstBx.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void tagsChanged(object sender, TextChangedEventArgs e)
+        {
+            String[] splittedTags = tagsTxtBx.Text.Split(' ');
+            List<string> tagsToDelete = new List<string>();
+            foreach (string tag in Tags)
+            {
+                if (!splittedTags.Contains(tag))
+                    tagsToDelete.Add(tag);
+            }
+            foreach (string tagToDelete in tagsToDelete)
+                Tags.Remove(tagToDelete);
+            foreach (string tag in Tags)
+                tagsTxtBx.Text += tag + ' ';
+            string lastTag = splittedTags[Math.Max(splittedTags.Length - 1, 0)];
+            if ((lastFieldEditted != Field.Topic || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && lastTag.Length > 0)
+            {
+                suggestionsLstBx.SetValue(Grid.RowProperty, 5);
+                suggestionsLstBx.SetValue(Grid.ColumnProperty, 6);
+                string[] chosenTags = tagsTxtBx.Text.Split(' ');
+                UpdateSuggestions(chosenTags[Math.Max(chosenTags.Length - 1, 0)], _tags);
+                suggestionsLstBx.ItemsSource = _suggestion;
+                suggestionsLstBx.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void suggestionPick_Click(object sender, MouseButtonEventArgs e)
+        {
+            suggestionsLstBx.Visibility = Visibility.Hidden;
+            string chosenInput = (string)suggestionsLstBx.SelectedItem;
+            if (lastFieldEditted == Field.University)
+                universityTxtBx.Text = chosenInput;
+            if (lastFieldEditted == Field.CourseNo)
+                courseNoTxtBx.Text = chosenInput;
+            if (lastFieldEditted == Field.CourseName)
+                courseNameTxtBx.Text = chosenInput;
+            if (lastFieldEditted == Field.Topic)
+            {
+                string[] splittedTagss = tagsTxtBx.Text.Split(' ');
+                Tags.Add(splittedTagss[Math.Max(0, splittedTagss.Length - 1)]);
+                tagsTxtBx.Text = String.Empty;
+                foreach (string tag in Tags)
+                {
+                    tagsTxtBx.Text += tag + ' ';
+                }
+            }
+            if (lastFieldEditted == Field.Topic)
+            {
+
+            }
         }
     }
 }
