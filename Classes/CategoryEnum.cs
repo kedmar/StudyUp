@@ -7,5 +7,6 @@ using System.Threading.Tasks;
 namespace Classes
 {
     public enum CategoryEnum { Summary, Lecture, Practice, FormulasPage, Tests, AudioClass, VideoClass }
+    
 
 }
