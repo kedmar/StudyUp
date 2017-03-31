@@ -319,15 +319,244 @@ namespace StudyUpModel
 
             RunQuery(results, IDs, cmd);
 
-            bool uni = false;
+            int uniID = -1;
             if (university != null)
                 if(university != "")
-                {
-                    uni = true;
+                    uniID = getUniversityID(university);
+            string classID = "";
+            if(course != null)
+                if(course.CourseNo != null)
+                    if(course.CourseNo != "")
+                    {
+                        classID = course.CourseNo;
+                    }
+            if(uniID > 0 || classID != "")
+            {
+                string cmd2 = "SELECT DocID FROM Class-Doc WHERE";
+                if (uniID > 0)
+                    cmd2 += " [UniversityID] = '" + uniID + "'";
+                if (uniID > 0 || classID != "")
+                    cmd2 += " OR";
+                if (classID != "")
+                    cmd2 += " [ClassID] = '" + classID + "'";
+                RunQuery(results, IDs, cmd2);
+            }
 
+            if(uploader != null)
+                if(uploader != "")
+                {
+                    List<int> userDocs = GetUserDocs(uploader);
+                    GetDocs(results, IDs, userDocs);
+                }
+
+            if (topic != null)
+                if (topic.Count > 0)
+                {
+                    List<int> userDocs2 = new List<int>();
+                    List<int> topicIDs = new List<int>();
+                    foreach (string t in topic)
+                    {
+                        string cmd3 = "SELECT ID FROM Topics WHERE [Topic] = '" + t + "'";
+                        GetTopicIDs(topicIDs, cmd3);
+                    }
+                    GetTopicDocs(topicIDs, userDocs2);
+                    GetDocs(results, IDs, userDocs2);
+                }
+
+            if (tags != null)
+                if (tags.Count > 0)
+                {
+                    List<int> userDocs3 = new List<int>();
+                    foreach (string t in tags)
+                    {
+                        string cmd4 = "SELECT DocID FROM Doc-Tag WHERE [Tag] = '" + t + "'";
+                        GetTagDocs(userDocs3, cmd4);
+                    }
+                    GetDocs(results, IDs, userDocs3);
                 }
 
             return results;
+        }
+
+        private void GetTopicDocs(List<int> topicIDs, List<int> userDocs2)
+        {
+            try
+            {
+                if (!dbConnect())
+                    return;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+                DataSet ds = new DataSet();
+
+                //Create the InsertCommand.
+                command = new OleDbCommand("SELECT * FROM Doc-Topic", connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    int field1 = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                    int field2 = Convert.ToInt32(ds.Tables[0].Rows[i][1]);
+                    if (!userDocs2.Contains(field1) && topicIDs.Contains(field2))
+                        userDocs2.Add(field1);
+                }
+                dbClose();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+        }
+
+        private void GetTopicIDs(List<int> topicIDs, string cmd3)
+        {
+            try
+            {
+                if (!dbConnect())
+                    return;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+                DataSet ds = new DataSet();
+
+                //Create the InsertCommand.
+                command = new OleDbCommand(cmd3, connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+                {
+                    int field = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                    if (!topicIDs.Contains(field))
+                        topicIDs.Add(field);
+                }
+                dbClose();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+        }
+
+        private void GetTagDocs(List<int> userDocs, string cmd4)
+        {
+            try
+            {
+                if (!dbConnect())
+                return;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(cmd4, connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int field = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!userDocs.Contains(field))
+                    userDocs.Add(field);
+            }
+            dbClose();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+        }
+
+        private void GetDocs(List<Material> results, List<int> IDs, List<int> userDocs)
+        {
+            DataSet ds = new DataSet();
+            try
+            {
+                if (!dbConnect())
+                    return;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+
+                //Create the InsertCommand.
+                command = new OleDbCommand("SELECT * FROM Documents", connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                dbClose();
+            }
+            catch (Exception e)
+            {
+                return;
+            }
+
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (userDocs.Contains(currentID) && !IDs.Contains(currentID))
+                {
+                    string university = GetDocUniversity(currentID);
+                    Courses course = GetDocCourse(currentID, university);
+                    string title = ds.Tables[0].Rows[i][5].ToString();
+                    List<string> topic = GetDocTopics(currentID);
+                    List<string> tags = GetDocTags(currentID);
+                    string category = ds.Tables[0].Rows[i][2].ToString();
+                    bool printed = Convert.ToBoolean(ds.Tables[0].Rows[i][3]);
+                    string path = ds.Tables[0].Rows[i][1].ToString();
+                    Material mat = new Material(university, course, title, topic, tags, category, printed, path);
+                    mat.ID = currentID;
+                    mat.Uploader = currentUser;
+                    mat.UploadedDateTime = Convert.ToDateTime(ds.Tables[0].Rows[i][6]);
+                    results.Add(mat);
+                    IDs.Add(currentID);
+
+                }
+            }
+        }
+
+        private List<int> GetUserDocs(string uploader)
+        {
+            if (!dbConnect())
+                return null;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT DocID FROM User-Doc WHERE [User] = '" + uploader + "'", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            List<int> record_list = new List<int>();
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int field = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if (!record_list.Contains(field))
+                    record_list.Add(field);
+            }
+            dbClose();
+            return record_list;
+        }
+
+        private int getUniversityID(string university)
+        {
+            if (!dbConnect())
+                return 0;
+            OleDbDataAdapter adapter = new OleDbDataAdapter();
+            OleDbCommand command;
+            DataSet ds = new DataSet();
+
+            //Create the InsertCommand.
+            command = new OleDbCommand(
+                "SELECT ID FROM Universities WHERE [University] = '" + university + "'", connection);
+
+            adapter.SelectCommand = command;
+            adapter.Fill(ds);
+            int uniID = 0;
+            if (ds.Tables[0].Rows.Count > 0)
+                uniID = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+            dbClose();
+            return uniID;
         }
 
         private void RunQuery(List<Material> results, List<int> IDs, string cmd)
