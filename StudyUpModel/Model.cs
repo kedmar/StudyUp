@@ -40,8 +40,10 @@ namespace StudyUpModel
         {
             try
             {
-                if (!File.Exists(counterPath))
-                    File.Create(counterPath);
+                if (File.Exists(counterPath))
+                    File.Delete(counterPath);
+                var myFile = File.Create(counterPath);
+                myFile.Close();
             }
             catch (Exception e)
             {
@@ -50,14 +52,16 @@ namespace StudyUpModel
 
             try
             {
+                fileCount++;
                 using (StreamWriter newTask = new StreamWriter(counterPath, false))
+                {
                     newTask.Write(fileCount.ToString());
+                    newTask.Close();
+                }
                 return true;
             }
             catch (Exception e)
             {
-                if (File.Exists(counterPath))
-                    File.Delete(counterPath);
                 return false;
             }
         }
@@ -977,11 +981,11 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO [Class-Doc] ([User], [DocID], [UniversityID]) VALUES (?, ?, ?)", connection);
+                "INSERT INTO [Class-Doc] ([ClassID], [DocID], [UniversityID]) VALUES (?, ?, ?)", connection);
 
             command.Parameters.AddWithValue("@ClassID", newMat.Course.CourseNo);
             command.Parameters.AddWithValue("@DocID", newMat.ID);
-            command.Parameters.AddWithValue("@UniversityID", newMat.Universrty);
+            command.Parameters.AddWithValue("@UniversityID", getUniversityID(newMat.Universrty));//TODO: Get ID
             adapter.InsertCommand = command;
             adapter.InsertCommand.ExecuteNonQuery();
             dbClose();
@@ -993,7 +997,8 @@ namespace StudyUpModel
             Dictionary<string, int> topicNames = GetTopicNamesFromDatabase();
             foreach (string t in newMat.Topic)
             {
-                InsertTopic(topicNames[t], newMat.ID);
+                if(topicNames.ContainsKey(t))
+                    InsertTopic(topicNames[t], newMat.ID);
             }
             
             return true;
@@ -1024,18 +1029,24 @@ namespace StudyUpModel
         {
             List<string> tags = GetTagsFromDatabase();
             List<string> newTags = new List<string>();
-            foreach (string t in newMat.Topic)
+            foreach (string t in newMat.Tags)
             {
-                if (!tags.Contains(t))
-                    newTags.Add(t);
-                if (!InsertDocTag(newMat.ID, t))
-                    return false;
+                if(t != "")
+                {
+                    if (!tags.Contains(t))
+                        newTags.Add(t);
+                    if (!InsertDocTag(newMat.ID, t))
+                        return false;
+                }
             }
             foreach (string t in tags)
             {
-                InsertTag(t);
-                if (!InsertDocTag(newMat.ID, t))
-                    return false;
+                if(t != "")
+                {
+                    InsertTag(t);
+                    if (!InsertDocTag(newMat.ID, t))
+                        return false;
+                }
             }
 
             return true;

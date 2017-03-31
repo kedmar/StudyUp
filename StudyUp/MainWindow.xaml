@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
-        Title="StudyUp" Height="350" Width="525"   WindowState="Maximized" >
+        Title="StudyUp" Height="550" Width="750" >
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="#fdfcff"/>
@@ -31,21 +31,28 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
             <RowDefinition Height="*" />
-            <RowDefinition Height="*" />
+            <RowDefinition Height="0.5*" />
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="6" VerticalAlignment="Top" HorizontalAlignment="Center" Width="Auto" Height="Auto" Stretch="Fill" Source="Images\Logo.png" Margin="0,26,0,0"/>
-        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="10">
-            <Menu VerticalAlignment="Stretch">
-                <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
-                <MenuItem Header="Upload Material" Click="Upload_Click"/>
-                <MenuItem Header="Login" Click="LogIn_Click"/>
-                <MenuItem Header="Sign Up" Click="LogIn_Click"/>
+        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="10" Width="Auto" Height="Auto" Margin="0,8,0,8">
+            <Menu VerticalAlignment="Stretch" HorizontalAlignment="Stretch" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="7">
+                <Menu.Background>
+                    <SolidColorBrush Color="#d2c7db"/>
+                </Menu.Background>
+                <MenuItem Grid.Row="0" Grid.Column="0" Header="Advanced Search" Click="AdvancedSearch_Click" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Left"/>
+                <MenuItem Grid.Column="1" Header="|" FontSize="20"/>
+                <MenuItem Grid.Column="2" Header="Upload Material" Click="Upload_Click" FontSize="20" FontWeight="SemiBold"/>
+                <MenuItem Grid.Column="3" Header="|" FontSize="20"/>
+                <MenuItem Grid.Column="4" Header="Login" Click="LogIn_Click" FontSize="20" FontWeight="SemiBold"/>
+                <MenuItem Grid.Column="5" Header="|" FontSize="20"/>
+                <MenuItem Grid.Column="6" Header="Sign Up" Click="LogIn_Click" FontSize="20" FontWeight="SemiBold"/>
             </Menu>
         </DockPanel>
 
-        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="31,9.6,25,21.8" Grid.RowSpan="2">Enter your query:</Label>
-        <TextBox x:Name="queryTextBox" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,13.6,0,0.4"/>
-        <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="SimpleSearch_Click" Margin="33,22.6,32,9.8" Grid.RowSpan="2">Search</Button>
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="4" HorizontalAlignment="Center" Margin="25,9.6,25,21.8" Grid.RowSpan="2">Enter your query:</Label>
+        <TextBox x:Name="queryTextBox" Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,9,0,0" Height="28"/>
+        <Button Grid.Row="9" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Stretch" Click="SimpleSearch_Click" Grid.RowSpan="1">Search</Button>
     </Grid>
 </Window>
