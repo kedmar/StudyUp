@@ -19,7 +19,7 @@ namespace Classes
             Category = category;
             IsPrinted = printed;
             File = path;
-
+            score = 0;
         }
 
         public int ID { get; set; }
@@ -34,7 +34,7 @@ namespace Classes
         public DateTime UploadedDateTime { get; set; }
         //file = file path
         public string File { get; set; }
-        private int score;
+        public int score;
 
         public string CourseName
         {
