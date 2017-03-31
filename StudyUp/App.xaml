@@ -4,10 +4,10 @@
              xmlns:local="clr-namespace:StudyUp"
              Startup="App_Startup">
     <Application.Resources>
-        <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
+        <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#FFF68F" Opacity="1"/>
+                    <SolidColorBrush Color="#ece8ef" Opacity="1"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>
