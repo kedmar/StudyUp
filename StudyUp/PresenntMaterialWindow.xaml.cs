@@ -50,9 +50,10 @@ namespace StudyUp
                 hyperlink.Click += delegate (object sender, RoutedEventArgs e)
                 {
                     //run advanced shearch with the tag
-                    List<Material> searchResult = controler.RetreiveMaterialsAdvancedSearch(tag);
+                    Dictionary<Material, Double> searchResult = controler.RetreiveMaterialsAdvancedSearch(tag);
                     //open results window
-                            //DOTO!!!!!
+                    PresentResultsWindow win = new PresentResultsWindow(controler, searchResult);
+                    win.Show();
                     //close this window
                     this.Close();
                 };

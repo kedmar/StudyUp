@@ -12,7 +12,7 @@ namespace StudyUp
     /// <summary>
     /// Interaction logic for PresentResults.xaml
     /// </summary>
-    public partial class PresentResults : Window
+    public partial class PresentResultsWindow : Window
     {
         private Dictionary<Material, double> results;
         private IController _controller;
@@ -26,12 +26,12 @@ namespace StudyUp
         private ObservableCollection<Material> videoRes;
 
 
-        public PresentResults()
+        public PresentResultsWindow()
         {
             InitializeComponent();
         }
 
-        public PresentResults(IController _controller, Dictionary<Material, double> results)
+        public PresentResultsWindow(IController _controller, Dictionary<Material, double> results)
         {
             this._controller = _controller;
             this.results = results;
