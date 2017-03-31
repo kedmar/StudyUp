@@ -85,13 +85,13 @@ namespace StudyUpController
             return new Dictionary<Material, double>
             {
                 {new Material( "Ben Gurion", new Courses("Ben Gurion","3728907123","Artifical Inteligence"),"Searching algorithms",new List<string>(),new List<string>
-                { "#search" },"Lectures",true,String.Empty), 3.7 },
+                { "#search" },"Lectures",true,@"C:\Users\ליאור\Integral-Table.pdf"), 3.7 },
 
                 { new Material( "Ben Gurion", new Courses("Ben Gurion","3728907123","Data Mining"),"Data Preparation",new List<string>(),new List<string>
-                { "#data_preparation" },"Tests",true,String.Empty), 2.5 },
+                { "#data_preparation" },"Tests",true,@"C:\Users\ליאור\Integral-Table.pdf"), 2.5 },
 
-                { new Material( "Ben Gurion", new Courses("Ben Gurion","3725202323","Web Dev"),"Data Preparation",new List<string>(),new List<string>
-                {                 "#web_deb"  },"Tests",true,String.Empty), 1.6 },
+                { new Material( "Ben Gurion", new Courses("Ben Gurion","3725202323","Web Dev"),"HTML",new List<string>(),new List<string>
+                {                 "#web_deb"  },"Tests",true,@"C:\Users\ליאור\Integral-Table.pdf"), 1.6 },
             };
         }
 

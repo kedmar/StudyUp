@@ -47,6 +47,7 @@ namespace StudyUp
               
 
                 Hyperlink hyperlink = new Hyperlink(run);
+                hyperlink.FontSize = 16;
                 hyperlink.Click += delegate (object sender, RoutedEventArgs e)
                 {
                     //run advanced shearch with the tag
