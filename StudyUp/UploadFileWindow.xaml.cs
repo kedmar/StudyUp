@@ -87,6 +87,7 @@ namespace StudyUp
             string university = universityTxtBx.Text;
             Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
             Material material = new Material(university, course, titleTxtBx.Text, topic, tags, categoryCmbBx.Text, (isPrintedCheckBox.IsChecked == true), src_path);
+            _controller.UploadMaterial(material);
             DialogResult = true;
             Close();
         }
