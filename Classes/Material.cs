@@ -35,6 +35,7 @@ namespace Classes
         //file = file path
         public string File { get; set; }
         public int score;
+        bool isRand = true;
 
         public string CourseName
         {
@@ -48,12 +49,19 @@ namespace Classes
         {
             get
             {
-                Random rand = new Random();
-                return rand.Next(15, 150);
+                if (isRand)
+                {
+                    Random rand = new Random();
+                    score = rand.Next(15, 150);
+                }
+                isRand = true;
+                return score;
+               
             }
             set
             {
-                Score = value;
+                score = value;
+                isRand = true;
             }
         }
 

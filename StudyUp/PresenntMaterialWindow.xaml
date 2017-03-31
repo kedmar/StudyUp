@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
         Title="PresenntMaterialWindow" Height="300"  Width="300"     WindowStartupLocation="CenterScreen" WindowState="Maximized">
-    <Grid ShowGridLines="True">
+    <Grid>
         <Grid.Background>
             <SolidColorBrush Color="#fdfcff"/>
         </Grid.Background>
@@ -40,18 +40,22 @@
         </Grid.ColumnDefinitions>
 
 
-        <StackPanel x:Name="tagsLinks" Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2"></StackPanel>
+        <StackPanel x:Name="tagsLinks" Grid.Row="1" Grid.RowSpan="6" Grid.Column="1" Grid.ColumnSpan="2">
+            <Label FontSize="15" VerticalAlignment="Top">Tags:</Label>
+        </StackPanel>
 
         <WebBrowser x:Name="webBrowser" Grid.Row ="1" Grid.RowSpan="7" Grid.Column="4" Grid.ColumnSpan="6" />
 
         <Button Grid.Row="8" Grid.Column="8" Click="LikeButton_Click" Background="Transparent" Focusable="False">
             <Image Source="Images\LikeImg.png" Focusable="False"></Image>
         </Button>
+
+        <Button Grid.Row="8" Grid.Column="5" Click="LikeButton_Click" Background="Transparent" Focusable="False">Save File</Button>
         <Label 
            x:Name="likes" Grid.Row="8" Grid.Column="9" BorderBrush="Transparent" FontSize="16" HorizontalAlignment="Left" Margin="0,0,0,0" Foreground="#FF000000"  ></Label>
 
 
-        <Image Grid.Row="0" Grid.Column="9" VerticalAlignment="Top" HorizontalAlignment="Center" Width="39" Height="22" Stretch="Fill" Source="Images\Logo.png" Margin="9.6,0,0.2,0" Grid.ColumnSpan="2"/>
+        <Image Grid.Row="0" Grid.Column="9" VerticalAlignment="Top" HorizontalAlignment="Center" Source="Images\Logo.png" Grid.ColumnSpan="2"/>
 
         <Image Grid.Row="9" Grid.Column="4" Source="Images\profileImg.png" Margin="0,3,4,3" HorizontalAlignment="Right"></Image>
         <Label  FontSize="16" x:Name="commen1" Grid.Row="9" Grid.Column="5" Grid.ColumnSpan="3" BorderBrush="Coral" ></Label>
