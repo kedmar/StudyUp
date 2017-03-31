@@ -76,7 +76,7 @@
         <Button Grid.Row="13" Grid.Column="3" Click="Submit_Click">Submit</Button>
         <Button Grid.Row="13" Grid.Column="7" Click="Cancel_Click">Cancel</Button>
 
-        <ListBox x:Name="suggestionsLstBx" Grid.Row="9" Grid.Column="6" Grid.RowSpan="3" Grid.ColumnSpan="4" MouseDoubleClick="suggestionPick_Click"/>
+        <ListBox x:Name="suggestionsLstBx" Grid.Row="9" Grid.Column="6" Grid.RowSpan="3" Visibility="Hidden" Grid.ColumnSpan="4" MouseDoubleClick="suggestionPick_Click"/>
 
     </Grid>
 </Window>

@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
-        Title="StudyUp" Height="350" Width="525"   WindowState="Maximized">
+        Title="StudyUp" Height="350" Width="525"   WindowState="Maximized" >
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
@@ -31,7 +31,7 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="6" VerticalAlignment="Top" HorizontalAlignment="Center" Width="Auto" Height="Auto" Stretch="Fill" Source="Logo.png" Margin="0,2,0,0"/>
+        <Image Grid.Row="0" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="6" VerticalAlignment="Top" HorizontalAlignment="Center" Width="Auto" Height="Auto" Stretch="Fill" Source="Images\Logo.png" Margin="0,26,0,0"/>
         <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="10">
             <Menu VerticalAlignment="Stretch">
                 <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
