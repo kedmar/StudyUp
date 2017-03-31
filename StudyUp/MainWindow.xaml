@@ -31,21 +31,18 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.RowSpan="2" Grid.Column="2" Grid.ColumnSpan="5" VerticalAlignment="Center" HorizontalAlignment="Center">StudyUp</Label>
-        <DockPanel Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="10">
+        <Image Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="8" Grid.RowSpan="6" VerticalAlignment="Top" HorizontalAlignment="Center" Width="Auto" Height="Auto" Stretch="Fill" Source="Logo.png" Margin="0,2,0,0"/>
+        <DockPanel Grid.Row="6" Grid.Column="0" Grid.ColumnSpan="10">
             <Menu VerticalAlignment="Stretch">
                 <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
                 <MenuItem Header="Upload Material" Click="Upload_Click"/>
-            </Menu>
-        </DockPanel>
-        <DockPanel Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="10" >
-            <Menu DockPanel.Dock="Top" >
                 <MenuItem Header="Login"/>
                 <MenuItem Header="Sign Up" />
             </Menu>
         </DockPanel>
-        <Label Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="3">Enter your query:</Label>
-        <TextBox x:Name="queryTextBox" Grid.Row="5" Grid.Column="3" Grid.ColumnSpan="5" VerticalAlignment="Center"/>
-        <Button Grid.Row="7" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="SimpleSearch_Click" Margin="32,0">Search</Button>
+
+        <Label Grid.Row="7" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" Margin="31,9.6,25,21.8" Grid.RowSpan="2">Enter your query:</Label>
+        <TextBox x:Name="queryTextBox" Grid.Row="7" Grid.Column="3" Grid.ColumnSpan="5" VerticalAlignment="Center" Margin="0,13.6,0,0.4"/>
+        <Button Grid.Row="8" Grid.Column="4" Grid.ColumnSpan="2" HorizontalAlignment="Center" Click="SimpleSearch_Click" Margin="33,22.6,32,9.8" Grid.RowSpan="2">Search</Button>
     </Grid>
 </Window>
