@@ -4,16 +4,7 @@
              xmlns:local="clr-namespace:StudyUp"
              Startup="OnStartup">
     <Application.Resources>
-        <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
-            <Setter Property="Background">
-                <Setter.Value>
-                    <SolidColorBrush Color="#fdfcff"/> 
-                </Setter.Value>
-            </Setter>
-            <Setter Property="HorizontalAlignment" Value="Stretch"/>
-        </Style>
-        <!--x:Key="FieldDescriptionStyle"-->
-        <!--<Style  TargetType="{x:Type Label}">
+        <Style  TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Margin" Value="8,8,8,8"/>
@@ -26,7 +17,7 @@
         <Style x:Key="ComboBoxStyle" TargetType="ComboBox">
             <Setter Property="FontSize" Value="20"/>
             <Setter Property="Background" Value="#d2c7db"/>
-            --><!--<Setter Property="Foreground" Value="#fdfcff"/>--><!--
+            <Setter Property="Foreground" Value="#fdfcff"/>
             <Setter Property="IsEditable" Value="True"/>
             <Setter Property="IsReadOnly" Value="True"/>
             <Setter Property="VerticalAlignment" Value="Center"/>
@@ -47,6 +38,6 @@
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold"/>
             <Setter Property="Margin" Value="8,8,8,8"/>
-        </Style>-->
+        </Style>
     </Application.Resources>
 </Application>
