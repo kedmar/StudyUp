@@ -99,7 +99,6 @@ namespace StudyUp
                         videoRes.Add(material);
                         break;
                     default:
-                        MessageBox.Show("", "Worng Category.", MessageBoxButton.OK);
                         break;
                 }
             }
