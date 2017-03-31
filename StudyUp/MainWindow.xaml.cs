@@ -37,7 +37,7 @@ namespace StudyUp
         private void SimpleSearch_Click(object sender, RoutedEventArgs e)
         {
             if (queryTextBox == null || queryTextBox.Text == "")
-                MessageBox.Show("Error", "No Query", MessageBoxButton.OK);
+                MessageBox.Show("No Query", "Error", MessageBoxButton.OK);
             else
                 _controller.RetreiveMaterialsSimpleSearch(queryTextBox.Text);
         }
@@ -51,7 +51,7 @@ namespace StudyUp
 
         private void LogIn_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show("Not implemented", "Not implemented yet", MessageBoxButton.OK);
+            MessageBox.Show("Not implemented  yet", "Not implemented", MessageBoxButton.OK);
         }
     }
 }
