@@ -28,8 +28,8 @@ namespace StudyUpModel
 
         public Model()
         {
-            dbPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\StudyUpModel\\StudyUpDB.accdb";
-            dataPath = Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName + "\\StudyUpModel\\Data";
+            dbPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName + "\\StudyUp\\StudyUpModel\\StudyUpDB.accdb";
+            dataPath = Directory.GetParent(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.FullName).Parent.FullName + "\\StudyUp\\StudyUpModel\\Data";
             counterPath = dataPath + "\\FileCount";
             currentUser = "legacy";
 

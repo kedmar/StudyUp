@@ -20,7 +20,7 @@ namespace StudyUp
             Model model = new Model();
             Controller controller = new Controller();
             controller.SetModel(model);
-            MainWindow win = new StudyUp.MainWindow(controller);
+            MainWindow win = new StudyUp.MainWindow(ref controller);
             win.Show();
 
         }

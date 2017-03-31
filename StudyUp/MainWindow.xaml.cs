@@ -12,7 +12,7 @@ namespace StudyUp
     public partial class MainWindow : Window
     {
         IController _controller;
-        public MainWindow(IController controller)
+        public MainWindow(ref Controller controller)
         {
             InitializeComponent();
             _controller = controller;
@@ -21,7 +21,7 @@ namespace StudyUp
 
         private void AdvancedSearch_Click(object sender, RoutedEventArgs e)
         {
-            AdvancedSearchWindow win = new AdvancedSearchWindow(_controller);
+            AdvancedSearchWindow win = new AdvancedSearchWindow(ref _controller);
             if (win.ShowDialog() == true)
             {
                 Dictionary<Material, double> results = _controller.RetreiveMaterialsAdvancedSearch(win.University, win.University, win.CourseNo, win.CourseName, win.Title

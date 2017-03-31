@@ -49,7 +49,7 @@ namespace StudyUp
         public string Category { get; private set; }
         public bool IsPrinted { get; private set; }
 
-        public AdvancedSearchWindow(IController controller)
+        public AdvancedSearchWindow(ref IController controller)
         {
             InitializeComponent();
             _controller = controller;
