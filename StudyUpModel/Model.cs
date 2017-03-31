@@ -616,9 +616,92 @@ namespace StudyUpModel
             for(int i = 0; i < queryWords.Length; i++)
             {
                 SimpleSearch(results, IDs, queryWords[i]);
+                List<int> docs = GetDocIDsFromTags(queryWords[i]);
+                foreach (int doc in docs)
+                {
+                    DataSet ds = new DataSet();
+                    try
+                    {
+                        if (!dbConnect())
+                            break;
+                        OleDbDataAdapter adapter = new OleDbDataAdapter();
+                        OleDbCommand command;
+
+                        string cmdStr = "SELECT * FROM [Documents]";
+
+                        //Create the InsertCommand.
+                        command = new OleDbCommand(cmdStr, connection);
+
+                        adapter.SelectCommand = command;
+                        adapter.Fill(ds);
+                        dbClose();
+                    }
+                    catch (Exception e)
+                    {
+                        break;
+                    }
+                    
+                    for (int j = 0; j < ds.Tables[0].Rows.Count; j++)
+                    {
+                        if (Convert.ToInt32(ds.Tables[0].Rows[j][0]) == doc)
+                        {
+                            if (!IDs.Contains(doc))
+                            {
+                                string university = GetDocUniversity(doc);
+                                Courses course = GetDocCourse(doc, university);
+                                string title = ds.Tables[0].Rows[j][5].ToString();
+                                List<string> topic = GetDocTopics(doc);
+                                List<string> tags = GetDocTags(doc);
+                                string category = ds.Tables[0].Rows[j][2].ToString();
+                                bool printed = Convert.ToBoolean(ds.Tables[0].Rows[j][3]);
+                                string path = ds.Tables[0].Rows[j][1].ToString();
+                                Material mat = new Material(university, course, title, topic, tags, category, printed, path);
+                                mat.ID = doc;
+                                mat.Uploader = currentUser;
+                                mat.UploadedDateTime = Convert.ToDateTime(ds.Tables[0].Rows[j][6]);
+                                results.Add(mat);
+                                IDs.Add(doc);
+
+                            }
+                        }
+                    }
+                }
             }
 
             return results;
+        }
+
+        private List<int> GetDocIDsFromTags(string query)
+        {
+            List<int> res = new List<int>();
+            DataSet ds = new DataSet();
+            try
+            {
+                if (!dbConnect())
+                    return res;
+                OleDbDataAdapter adapter = new OleDbDataAdapter();
+                OleDbCommand command;
+
+                string cmdStr = "SELECT * FROM [Doc-Tag]";
+
+                //Create the InsertCommand.
+                command = new OleDbCommand(cmdStr, connection);
+
+                adapter.SelectCommand = command;
+                adapter.Fill(ds);
+                dbClose();
+            }
+            catch (Exception e)
+            {
+                return res;
+            }
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                if (ds.Tables[0].Rows[i][1].ToString().Contains(query))
+                    res.Add(Convert.ToInt32(ds.Tables[0].Rows[i][0]));
+            }
+            return res;
         }
 
         private void SimpleSearch(List<Material> results, List<int> IDs, string query)
@@ -633,9 +716,7 @@ namespace StudyUpModel
                 OleDbDataAdapter adapter = new OleDbDataAdapter();
                 OleDbCommand command;
 
-                string cmdStr = "SELECT * FROM Documents WHERE [Path] = '" + query + "' OR [Type] = '" + query + "' OR [Title] = '" + query + "'";
-                if (isNum)
-                    cmdStr = " OR [ID] = '" + queryNum + "'";
+                string cmdStr = "SELECT * FROM Documents";
 
                 //Create the InsertCommand.
                 command = new OleDbCommand(cmdStr, connection);
@@ -652,6 +733,7 @@ namespace StudyUpModel
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if(ds.Tables[0].Rows[i][1].ToString().Contains(query) || ds.Tables[0].Rows[i][2].ToString().Contains(query) || ds.Tables[0].Rows[i][5].ToString().Contains(query) || ds.Tables[0].Rows[i][7].ToString().Contains(query))
                 if (!IDs.Contains(currentID))
                 {
                     string university = GetDocUniversity(currentID);
@@ -679,15 +761,15 @@ namespace StudyUpModel
             string className = "";
             if (classID != 0)
             {
-                Dictionary<int, string> classes = getClassNames(classID);
-                if (classes.ContainsKey(classID))
-                    className = classes[classID];
+                Dictionary<string, string> classes = getClassNames(classID);
+                if (classes.ContainsKey(classID.ToString()))
+                    className = classes[classID.ToString()];
             }
             Courses course = new Courses(university, classID.ToString(), className);
             return course;
         }
 
-        private Dictionary<int, string> getClassNames(int classID)
+        private Dictionary<string, string> getClassNames(int classID)
         {
             if (!dbConnect())
                 return null;
@@ -701,10 +783,10 @@ namespace StudyUpModel
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
-            Dictionary<int, string> record_list = new Dictionary<int, string>();
+            Dictionary<string, string> record_list = new Dictionary<string, string>();
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                int key = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                string key = ds.Tables[0].Rows[i][0].ToString(); ;
                 string field = ds.Tables[0].Rows[i][2].ToString();
                 if (!record_list.ContainsKey(key))
                     record_list.Add(key, field);
@@ -723,15 +805,19 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT ClassID FROM [Class-Doc] WHERE [DocID] = '" + docID + "'", connection);
+                "SELECT * FROM [Class-Doc]", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
-            int classID = 0;
-            if (ds.Tables[0].Rows.Count > 0)
-                classID = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int doc = Convert.ToInt32(ds.Tables[0].Rows[i][1]);
+                if (doc == docID)
+                    return Convert.ToInt32(ds.Tables[0].Rows[i][2]);
+            }
             dbClose();
-            return classID;
+            return 0;
         }
 
         private string GetDocUniversity(int docID)
@@ -782,15 +868,21 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT UniversityID FROM [Class-Doc] WHERE [DocID] = '" + docID + "'", connection);
+                "SELECT * FROM [Class-Doc]", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
-            int uniID = 0;
             if (ds.Tables[0].Rows.Count > 0)
-                uniID = Convert.ToInt32(ds.Tables[0].Rows[0][0]);
             dbClose();
-            return uniID;
+
+            for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
+            {
+                int doc = Convert.ToInt32(ds.Tables[0].Rows[i][1]);
+                if(doc == docID)
+                    return Convert.ToInt32(ds.Tables[0].Rows[i][2]);
+            }
+            return 0;
+
         }
 
         private List<string> GetDocTags(int docID)
@@ -803,16 +895,19 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT * FROM Documents WHERE [ID] = '" + docID + "'", connection);
+                "SELECT * FROM [Doc-Tag]", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
             List<string> record_list = new List<string>();
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
-                string field = ds.Tables[0].Rows[i][0].ToString();
-                if (!record_list.Contains(field))
-                    record_list.Add(field);
+                if(Convert.ToInt32(ds.Tables[0].Rows[i][0]) == docID)
+                {
+                    string field = ds.Tables[0].Rows[i][1].ToString();
+                    if (!record_list.Contains(field))
+                        record_list.Add(field);
+                }
             }
             dbClose();
             return record_list;

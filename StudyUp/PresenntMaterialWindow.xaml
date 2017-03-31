@@ -8,7 +8,7 @@
         Title="PresenntMaterialWindow" Height="300"  Width="300"     WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="#fdfcff"/>
+            <SolidColorBrush Color="#140e33"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
