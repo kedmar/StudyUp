@@ -143,10 +143,13 @@
     <Folder Include="UserControls\" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="profileImg.png" />
+    <Resource Include="Images\profileImg.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="LikeImg.png" />
+    <Resource Include="Images\LikeImg.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
