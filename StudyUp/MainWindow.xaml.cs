@@ -45,6 +45,7 @@ namespace StudyUp
         private void Upload_Click(object sender, RoutedEventArgs e)
         {
             UploadFileWindow win = new UploadFileWindow(_controller);
+            win.ShowDialog();
         }
 
     }
