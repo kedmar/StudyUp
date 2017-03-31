@@ -13,7 +13,7 @@ namespace StudyUpModel
         Boolean dbConnect();
         void dbClose();
         List<Material> RetreiveMaterialsSimpleSearch(string[] queryWords);
-        List<Material> RetreiveMaterialsAdvancedSearch(string university, Courses course, string uploaderMail, string title, List<string> topic, List<string>
+        List<Material> RetreiveMaterialsAdvancedSearch(string university, Courses course, string uploader, string title, List<string> topic, List<string>
             tags, string category, bool isPrinter);
         bool UploadMaterial(Material newMaterial);
         List<string> GetAllUniversities();
