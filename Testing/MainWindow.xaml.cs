@@ -12,6 +12,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using StudyUp;
+using StudyUpController;
+using Classes;
 
 namespace Testing
 {
@@ -24,6 +27,8 @@ namespace Testing
         public MainWindow()
         {
             InitializeComponent();
+            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
