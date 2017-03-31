@@ -14,7 +14,6 @@ namespace StudyUp
     /// </summary>
     public partial class PresentResultsWindow : Window
     {
-        private Dictionary<Material, double> results;
         private IController _controller;
 
         private ObservableCollection<Material> summeriesRes;
@@ -34,44 +33,48 @@ namespace StudyUp
         public PresentResultsWindow(IController _controller, Dictionary<Material, double> results)
         {
             InitializeComponent();
+            summeriesRes = new ObservableCollection<Material>();
+            lectursRes = new ObservableCollection<Material>();
 
+            prscticesRes = new ObservableCollection<Material>();
+            formulasRes = new ObservableCollection<Material>();
+            testsRes = new ObservableCollection<Material>();
+            summeriesRes = new ObservableCollection<Material>();
+            audioRes = new ObservableCollection<Material>();
+            videoRes = new ObservableCollection<Material>();
             this._controller = _controller;
-            this.results = results;
 
-            SplitAndSortResults();
+            SplitAndSortResults(results);
 
-            if(summeriesRes.Count!=0)
+
+            if (summeriesRes.Count != 0)
                 summaryDataGrid.ItemsSource = summeriesRes;
             if (lectursRes.Count != 0)
                 lectureReDataGrid.ItemsSource = lectursRes;
             if (prscticesRes.Count != 0)
                 prscticeDataGrid.ItemsSource = prscticesRes;
-            if(formulasRes.Count != 0)
+            if (formulasRes.Count != 0)
                 formulaDataGrid.ItemsSource = formulasRes;
             if (testsRes.Count != 0)
                 testDataGrid.ItemsSource = testsRes;
             if (audioRes.Count != 0)
                 audioDataGrid.ItemsSource = audioRes;
-            if(videoRes.Count!=0)
+            if (videoRes.Count != 0)
                 videoDataGrid.ItemsSource = videoRes;
 
 
         }
 
-        private void SplitAndSortResults()
+
+
+
+        private void SplitAndSortResults(Dictionary<Material, double> results)
         {
-            summeriesRes = new ObservableCollection<Material>();
-            lectursRes = new ObservableCollection<Material>();
-            prscticesRes = new ObservableCollection<Material>();
-            formulasRes = new ObservableCollection<Material>();
-            testsRes = new ObservableCollection<Material>();
-            audioRes = new ObservableCollection<Material>();
-            videoRes = new ObservableCollection<Material>();
+            results = results.OrderBy(i => i.Value).ToDictionary(t => t.Key, t => t.Value);
 
-        results = results.OrderBy(i => i.Value).ToDictionary(t => t.Key, t => t.Value);
-
-            foreach (Material material in results.Keys)
+            for (int i = 0; i < results.Count; i++)
             {
+                Material material = results.ElementAt(i).Key;
                 switch (material.Category)
                 {
                     case "Summary":
@@ -106,8 +109,7 @@ namespace StudyUp
 
         public void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
         {
-            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
-            Material m = row.Item as Material;
+            Material m = ((FrameworkElement)sender).DataContext as Material;
             User user = new User(12345, "Lior Perry");
             PresenntMaterialWindow win = new PresenntMaterialWindow(ref _controller, m, user);
             win.Show();

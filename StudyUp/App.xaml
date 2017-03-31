@@ -7,6 +7,7 @@
         <Style  TargetType="{x:Type Label}">
             <Setter Property="FontSize" Value="22" />
             <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Foreground" Value="#fdfcff"/>
             <Setter Property="Margin" Value="8,8,8,8"/>
         </Style>
         <Style x:Key="InstructionStyle" TargetType="{x:Type Label}">

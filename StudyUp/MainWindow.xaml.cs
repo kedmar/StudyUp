@@ -43,7 +43,6 @@ namespace StudyUp
                 Dictionary<Material,Double> res = _controller.RetreiveMaterialsSimpleSearch(queryTextBox.Text);
                 PresentResultsWindow win = new PresentResultsWindow(_controller, res);
                 win.ShowDialog();
-                this.Close();
             }
                 
         }
