@@ -26,7 +26,7 @@ namespace StudyUp
         string src_path;
         
 
-        Controller _controller;
+        IController _controller;
         ObservableCollection<string> _universities;
         ObservableCollection<Courses> _courses;
         ObservableCollection<string> _topics;
@@ -45,7 +45,7 @@ namespace StudyUp
         public UploadFileWindow(IController controller)
         {
             InitializeComponent();
-            controller = _controller;
+            _controller = controller;
             _universities = new ObservableCollection<string>(_controller.GetAllUniversities());
             _courses = new ObservableCollection<Courses>(_controller.GetAllCourses());
             _topics = new ObservableCollection<string>(_controller.GetAllTopics());

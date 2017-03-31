@@ -15,12 +15,12 @@ namespace StudyUp
     /// </summary>
     public partial class App : Application
     {
-        void App_Startup(object sender, StartupEventArgs e)
+        void OnStartup(object sender, StartupEventArgs e)
         {
             Model model = new Model();
             Controller controller = new Controller();
             controller.SetModel(model);
-            MainWindow win = new StudyUp.MainWindow(controller);
+            MainWindow win = new StudyUp.MainWindow(ref controller);
             win.Show();
 
         }
