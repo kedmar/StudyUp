@@ -34,6 +34,12 @@
             <Setter Property="Margin" Value="0"/>
             <Setter Property="Margin" Value="8,8,8,8"/>
         </Style>
+        <Style TargetType="ListBox">
+            <Setter Property="FontSize" Value="20" />
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="Margin" Value="0"/>
+            <Setter Property="Margin" Value="8,8,8,8"/>
+        </Style>
         <Style x:Key="PasswordBoxStyle" TargetType="PasswordBox">
             <Setter Property="FontSize" Value="20" />
             <Setter Property="FontWeight" Value="SemiBold"/>
