@@ -8,6 +8,9 @@
         Title="AdvancedSearchWindow" Height="800" Width="1000" WindowState="Maximized"
     >
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#fdfcff"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
             <ColumnDefinition Width="*" />
