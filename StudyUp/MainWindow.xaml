@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="StudyUp" Height="350" Width="525"   WindowState="Maximized" >
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#fdfcff"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" />
@@ -36,8 +39,8 @@
             <Menu VerticalAlignment="Stretch">
                 <MenuItem Header="Advanced Search" Click="AdvancedSearch_Click"/>
                 <MenuItem Header="Upload Material" Click="Upload_Click"/>
-                <MenuItem Header="Login"/>
-                <MenuItem Header="Sign Up" />
+                <MenuItem Header="Login" Click="LogIn_Click"/>
+                <MenuItem Header="Sign Up" Click="LogIn_Click"/>
             </Menu>
         </DockPanel>
 

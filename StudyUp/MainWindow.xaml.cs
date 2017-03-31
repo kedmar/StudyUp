@@ -21,14 +21,15 @@ namespace StudyUp
 
         private void AdvancedSearch_Click(object sender, RoutedEventArgs e)
         {
-            AdvancedSearchWindow win = new AdvancedSearchWindow(ref _controller);
-            if (win.ShowDialog() == true)
+            AdvancedSearchWindow win1 = new AdvancedSearchWindow(ref _controller);
+            if (win1.ShowDialog() == true)
             {
-                Dictionary<Material, double> results = _controller.RetreiveMaterialsAdvancedSearch(win.University, win.University, win.CourseNo, win.CourseName, win.Title
-                    , win.Topics, win.Tags, win.Category, win.IsPrinted);
+                Dictionary<Material, double> results = _controller.RetreiveMaterialsAdvancedSearch(win1.University, win1.University, win1.CourseNo, win1.CourseName, win1.Title
+                    , win1.Topics, win1.Tags, win1.Category, win1.IsPrinted);
 
                 //should open reasults window
-
+                PresentResultsWindow win2 = new PresentResultsWindow(_controller, results);
+                win2.ShowDialog();
             }
         }
 
@@ -36,7 +37,7 @@ namespace StudyUp
         private void SimpleSearch_Click(object sender, RoutedEventArgs e)
         {
             if (queryTextBox == null || queryTextBox.Text == "")
-                MessageBox.Show("", "No Query", MessageBoxButton.OK);
+                MessageBox.Show("Error", "No Query", MessageBoxButton.OK);
             else
                 _controller.RetreiveMaterialsSimpleSearch(queryTextBox.Text);
         }
@@ -48,5 +49,9 @@ namespace StudyUp
             win.ShowDialog();
         }
 
+        private void LogIn_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBox.Show("Not implemented", "Not implemented yet", MessageBoxButton.OK);
+        }
     }
 }

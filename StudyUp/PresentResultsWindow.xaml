@@ -7,6 +7,9 @@
         mc:Ignorable="d"
         Title="PresentResults" Height="300" Width="300">
     <Grid>
+        <Grid.Background>
+            <SolidColorBrush Color="#fdfcff"/>
+        </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
             <ColumnDefinition Width="*" />
@@ -34,7 +37,7 @@
         <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
         <Expander Header="Summaries" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="summaryDataGrid">
-                
+
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
                         <Style>
@@ -66,15 +69,15 @@
                         </DataTemplate>
                     </DataGridTemplateColumn.CellTemplate>
                 </DataGridTemplateColumn>
-                
+
             </DataGrid>
         </Expander>
 
-        
-        
-        
-        
-        
+
+
+
+
+
         <Expander Header="Lectures" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="lectureReDataGrid">
 
@@ -113,9 +116,9 @@
             </DataGrid>
         </Expander>
 
-        
-        
-        
+
+
+
         <Expander Header="Practices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="prscticeDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -152,12 +155,13 @@
             </DataGrid>
         </Expander>
 
-        
-        
-        
-        
-        
-        
+
+
+
+
+        <Image Grid.Row="0" Grid.Column="6" Grid.ColumnSpan="4" Grid.RowSpan="2" VerticalAlignment="Top" HorizontalAlignment="Center" Width="109" Height="52" Stretch="Fill" Source="Images\Logo.png" Margin="2.4,2,0.2,0"/>
+
+
         <Expander Header="Formulas" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="formulaDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -194,13 +198,13 @@
             </DataGrid>
         </Expander>
 
-        
-        
-        
-        
-        
-        
-        
+
+
+
+
+
+
+
         <Expander Header="Tests" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="testDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -237,10 +241,10 @@
             </DataGrid>
         </Expander>
 
-        
-        
-        
-        
+
+
+
+
         <Expander Header="Audios" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7" HorizontalAlignment="Right" Margin="0,0.333,0,0" Width="215">
             <DataGrid x:Name="audioDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -277,10 +281,10 @@
             </DataGrid>
         </Expander>
 
-        
-        
-        
-        
+
+
+
+
         <Expander Header="Video" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="videoDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">

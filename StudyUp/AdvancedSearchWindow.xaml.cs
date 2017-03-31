@@ -1,16 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using StudyUpController;
 using System.Collections.ObjectModel;
 using Classes;
@@ -60,6 +53,7 @@ namespace StudyUp
             _categories = new ObservableCollection<string>(_controller.GetAllCategories());
             categoryCmbBx.ItemsSource = _categories;
             Tags = new List<string>();
+            //courseNameTxtBx.LostFocus += LostFocusEvent;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -247,11 +241,19 @@ namespace StudyUp
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             lastFieldEditted = Field.Title;
+            suggestionsLstBx.Visibility = Visibility.Hidden;
         }
 
         private void CategoryChanged(object sender, SelectionChangedEventArgs e)
         {
             lastFieldEditted = Field.Category;
+            suggestionsLstBx.Visibility = Visibility.Hidden;
+
+        }
+
+        private void LostFocus_event(object sender, RoutedEventArgs e)
+        {
+            suggestionsLstBx.Visibility = Visibility.Hidden;
 
         }
     }
