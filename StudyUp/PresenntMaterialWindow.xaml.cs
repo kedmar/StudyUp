@@ -36,7 +36,7 @@ namespace StudyUp
             while(index1== index2)
                 index2 = rand.Next(0, 10);
             commen1.Content = comments[index1];
-            commen1.Content = comments[index2];
+            commen2.Content = comments[index2];
         }
 
         private void LoadTags()

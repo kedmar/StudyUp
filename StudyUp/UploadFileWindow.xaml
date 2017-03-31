@@ -9,7 +9,7 @@
     >
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="#fdfcff"/>
+            <SolidColorBrush Color="#140e33"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />

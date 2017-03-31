@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:StudyUp"
         mc:Ignorable="d"
-        Title="PresentResults" Height="300" Width="300">
+        Title="PresentResults" Height="1200" Width="1200" WindowStartupLocation="CenterScreen" WindowState="Maximized">
     <Grid>
         <Grid.Background>
             <SolidColorBrush Color="#fdfcff"/>
@@ -33,9 +33,17 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+            <RowDefinition Height="*" />
+
         </Grid.RowDefinitions>
-        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
-        <Expander Header="Summaries" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6">
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4" FontSize="30">Results:</Label>
+        <Expander Header="Summaries" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <DataGrid x:Name="summaryDataGrid">
 
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -52,7 +60,7 @@
 
                 <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
 
-                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                <DataGridTemplateColumn Header="Image" Width="50"  IsReadOnly="True">
                     <DataGridTemplateColumn.CellTemplate>
                         <DataTemplate>
                             <Grid>
@@ -63,7 +71,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png" Width="50" Height="50"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -78,7 +86,7 @@
 
 
 
-        <Expander Header="Lectures" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6">
+        <Expander Header="Lectures" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <DataGrid x:Name="lectureReDataGrid">
 
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
@@ -106,7 +114,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -119,7 +127,7 @@
 
 
 
-        <Expander Header="Practices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
+        <Expander Header="Practices" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <DataGrid x:Name="prscticeDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
@@ -146,7 +154,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -159,10 +167,10 @@
 
 
 
-        <Image Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right" Source="Images\Logo.png"/>
+        <Image Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right" Source="Images/LOGO.png"/>
 
 
-        <Expander Header="Formulas" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="6">
+        <Expander Header="Formulas" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="2">
             <DataGrid x:Name="formulaDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
@@ -189,7 +197,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -205,7 +213,7 @@
 
 
 
-        <Expander Header="Tests" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="3">
+        <Expander Header="Tests" Grid.Row="9" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="6">
             <DataGrid x:Name="testDataGrid">
                 <DataGrid.Columns>
 
@@ -223,7 +231,7 @@
 
                     <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
 
-                    <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn Header="Image" Width="50" IsReadOnly="True">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <Grid>
@@ -234,7 +242,7 @@
                                     <Grid.RowDefinitions>
                                         <RowDefinition Height="*" />
                                     </Grid.RowDefinitions>
-                                    <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                    <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                     <Label Grid.Column="1" Content="{Binding Score}"></Label>
                                 </Grid>
                             </DataTemplate>
@@ -245,10 +253,9 @@
         </Expander>
 
 
+<!--
 
-
-
-        <Expander Header="Audios" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7" HorizontalAlignment="Right" Margin="0,0.333,0,0" Width="215">
+        <Expander Header="Audios" Grid.Row="20" Grid.Column="2" Grid.ColumnSpan="7">
             <DataGrid x:Name="audioDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
@@ -275,7 +282,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -288,7 +295,7 @@
 
 
 
-        <Expander Header="Video" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6">
+        <Expander Header="Video" Grid.Row="24" Grid.Column="2" Grid.ColumnSpan="6" Grid.RowSpan="3">
             <DataGrid x:Name="videoDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
@@ -315,7 +322,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images/LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -323,5 +330,6 @@
                 </DataGridTemplateColumn>
             </DataGrid>
         </Expander>
+        -->
     </Grid>
 </Window>

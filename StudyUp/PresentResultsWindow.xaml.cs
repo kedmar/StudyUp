@@ -57,10 +57,10 @@ namespace StudyUp
                 formulaDataGrid.ItemsSource = formulasRes;
             if (testsRes.Count != 0)
                 testDataGrid.ItemsSource = testsRes;
-            if (audioRes.Count != 0)
+            /*if (audioRes.Count != 0)
                 audioDataGrid.ItemsSource = audioRes;
             if (videoRes.Count != 0)
-                videoDataGrid.ItemsSource = videoRes;
+                videoDataGrid.ItemsSource = videoRes;*/
 
 
         }

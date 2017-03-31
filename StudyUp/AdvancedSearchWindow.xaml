@@ -9,7 +9,7 @@
     >
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="#fdfcff"/>
+            <SolidColorBrush Color="#140e33"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
@@ -44,7 +44,7 @@
         </Grid.RowDefinitions>
         <Image Grid.Row="0" Grid.Column="8" Grid.ColumnSpan="2" Grid.RowSpan="2" HorizontalAlignment="Right" Source="Images\Logo.png"/>
 
-        <Label Grid.Row="0" Grid.ColumnSpan="10" Grid.Column="1" HorizontalAlignment="Left">Plese submit one ore more of the following fields:</Label>
+        <Label Grid.Row="0" Grid.ColumnSpan="10" Grid.Column="1" HorizontalAlignment="Left">Please submit one ore more of the following fields:</Label>
 
         <Label Grid.Row="2" Grid.ColumnSpan="4" Grid.Column="1" HorizontalAlignment="Left">University</Label>
         <TextBox x:Name="universityTxtBx" Grid.Row="3" Grid.ColumnSpan="5" HorizontalAlignment="Stretch" TextChanged="universityTxtBoxChanged" Height="51" Margin="11,0.4,0.2,0" Grid.RowSpan="2" VerticalAlignment="Top" LostFocus="LostFocus_event"/>
