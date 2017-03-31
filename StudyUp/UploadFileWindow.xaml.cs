@@ -57,10 +57,10 @@ namespace StudyUp
         private void Upload_Click(object sender, RoutedEventArgs e)
         {
 
-            FolderBrowserDialog fbd = new FolderBrowserDialog();
-            if (fbd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
+            OpenFileDialog ofd = new OpenFileDialog();
+            if (ofd.ShowDialog() != System.Windows.Forms.DialogResult.OK)
                 return;
-            src_path = fbd.SelectedPath;
+            src_path = ofd.FileName;
         }
 
         private void Submit_Click(object sender, RoutedEventArgs e)
@@ -87,6 +87,7 @@ namespace StudyUp
             string university = universityTxtBx.Text;
             Courses course = new Courses(university, courseNoTxtBx.Text, courseNameTxtBx.Text);
             Material material = new Material(university, course, titleTxtBx.Text, topic, tags, categoryCmbBx.Text, (isPrintedCheckBox.IsChecked == true), src_path);
+            _controller.UploadMaterial(material);
             DialogResult = true;
             Close();
         }
@@ -169,7 +170,7 @@ namespace StudyUp
 
         private void tagsChanged(object sender, TextChangedEventArgs e)
         {
-            if (suggestionTaken)
+            /*if (suggestionTaken)
             {
                 suggestionTaken = false;
                 return;
@@ -194,7 +195,7 @@ namespace StudyUp
                 UpdateSuggestions(chosenTags[Math.Max(chosenTags.Length - 1, 0)], _tags);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
-            }
+            }*/
         }
 
         private void suggestionPick_Click(object sender, MouseButtonEventArgs e)

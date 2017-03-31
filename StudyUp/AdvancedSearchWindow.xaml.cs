@@ -14,7 +14,7 @@ namespace StudyUp
     /// Interaction logic for AdvancedSearchWindow.xaml
     /// </summary>
 
-    public enum Field { None, University, CourseNo, CourseName, Title, Topic, Tag, IsPrinted };
+    public enum Field { None, University, CourseNo, CourseName, Title, Topic, Tag, IsPrinted , Category};
     public partial class AdvancedSearchWindow : Window
     {
         IController _controller;
@@ -72,6 +72,11 @@ namespace StudyUp
 
         private void universityTxtBoxChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+                suggestionTaken = false;
+                return;
+            }
             if ((lastFieldEditted != Field.University || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && universityTxtBx.Text.Length > 0)
             {
                 suggestionsLstBx.SetValue(Grid.RowProperty, 4);
@@ -79,6 +84,8 @@ namespace StudyUp
                 UpdateSuggestions(universityTxtBx.Text, _universities);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
+                lastFieldEditted = Field.University;
+
             }
 
         }
@@ -86,6 +93,11 @@ namespace StudyUp
 
         private void courseNoChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+                suggestionTaken = false;
+                return;
+            }
             if ((lastFieldEditted != Field.CourseNo || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && courseNoTxtBx.Text.Length > 0)
             {
                 suggestionsLstBx.SetValue(Grid.RowProperty, 6);
@@ -98,6 +110,8 @@ namespace StudyUp
                 UpdateSuggestions(courseNoTxtBx.Text, courseNoToPresent);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
+                lastFieldEditted = Field.CourseNo;
+
 
             }
         }
@@ -106,6 +120,11 @@ namespace StudyUp
 
         private void courseNameChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+                suggestionTaken = false;
+                return;
+            }
             if ((lastFieldEditted != Field.CourseName || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && courseNameTxtBx.Text.Length > 0)
             {
                 suggestionsLstBx.SetValue(Grid.RowProperty, 8);
@@ -118,6 +137,8 @@ namespace StudyUp
                 UpdateSuggestions(courseNameTxtBx.Text, courseNamesToPresent);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
+                lastFieldEditted = Field.CourseName;
+
             }
         }
 
@@ -135,6 +156,12 @@ namespace StudyUp
 
         private void topicChanged(object sender, TextChangedEventArgs e)
         {
+            if (suggestionTaken)
+            {
+                suggestionTaken = false;
+                return;
+            }
+
             if ((lastFieldEditted != Field.Topic || suggestionsLstBx.Visibility == suggestionsLstBx.Visibility) && topicTxtBx.Text.Length > 0)
             {
                 suggestionsLstBx.SetValue(Grid.RowProperty, 12);
@@ -142,6 +169,8 @@ namespace StudyUp
                 UpdateSuggestions(topicTxtBx.Text, _topics);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
+                lastFieldEditted = Field.Topic;
+
             }
         }
 
@@ -172,6 +201,7 @@ namespace StudyUp
                 UpdateSuggestions(chosenTags[Math.Max(chosenTags.Length - 1, 0)], _tags);
                 suggestionsLstBx.ItemsSource = _suggestion;
                 suggestionsLstBx.Visibility = Visibility.Visible;
+                lastFieldEditted = Field.Tag;
             }
         }
 
@@ -205,6 +235,17 @@ namespace StudyUp
         private void Cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
+        }
+
+        private void titleChanged(object sender, TextChangedEventArgs e)
+        {
+            lastFieldEditted = Field.Title;
+        }
+
+        private void CategoryChanged(object sender, SelectionChangedEventArgs e)
+        {
+            lastFieldEditted = Field.Category;
+
         }
     }
 }

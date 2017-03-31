@@ -76,7 +76,7 @@ namespace StudyUpModel
             {
                 connection.Open();
             }
-            catch
+            catch (Exception e)
             {
                 return false;
             }
