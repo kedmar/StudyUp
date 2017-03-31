@@ -59,15 +59,15 @@ namespace Classes
 
         public override int GetHashCode()
         {
-            return FooID;
+            return (Universrty + Course.CourseName + Course.CourseNo + Uploader + Title).GetHashCode(); ;
         }
         public override bool Equals(object obj)
         {
-            return Equals(obj as Foo);
+            return Equals(obj as Material);
         }
-        public bool Equals(Foo obj)
+        public bool Equals(Material obj)
         {
-            return obj != null && obj.FooID == this.FooID;
+            return obj != null && (obj.Universrty + obj.Course.CourseName + obj.Course.CourseNo + obj.Uploader + obj.Title) == (Universrty + Course.CourseName + Course.CourseNo + Uploader + Title);
         }
 
     }
