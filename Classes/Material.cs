@@ -19,7 +19,7 @@ namespace Classes
             Category = category;
             IsPrinted = printed;
             File = path;
-
+            score = 0;
         }
 
         public int ID { get; set; }
@@ -34,7 +34,7 @@ namespace Classes
         public DateTime UploadedDateTime { get; set; }
         //file = file path
         public string File { get; set; }
-        private int score;
+        public int score;
 
         public string CourseName
         {
@@ -51,8 +51,24 @@ namespace Classes
                 Random rand = new Random();
                 return rand.Next(15, 150);
             }
+            set
+            {
+                Score = value;
+            }
         }
 
+        public override int GetHashCode()
+        {
+            return FooID;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Foo);
+        }
+        public bool Equals(Foo obj)
+        {
+            return obj != null && obj.FooID == this.FooID;
+        }
 
     }
 }
