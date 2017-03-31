@@ -5,13 +5,14 @@ using StudyUpController;
 using System.Collections.ObjectModel;
 using System;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace StudyUp
 {
     /// <summary>
     /// Interaction logic for PresentResults.xaml
     /// </summary>
-    public partial class PresentResults : Window
+    public partial class PresentResultsWindow : Window
     {
         private Dictionary<Material, double> results;
         private IController _controller;
@@ -25,12 +26,12 @@ namespace StudyUp
         private ObservableCollection<Material> videoRes;
 
 
-        public PresentResults()
+        public PresentResultsWindow()
         {
             InitializeComponent();
         }
 
-        public PresentResults(IController _controller, Dictionary<Material, double> results)
+        public PresentResultsWindow(IController _controller, Dictionary<Material, double> results)
         {
             this._controller = _controller;
             this.results = results;
@@ -82,6 +83,17 @@ namespace StudyUp
                         break;
                 }
             }
+        }
+
+
+
+        public void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
+            Material m = row.Item as Material;
+            User user = new User(12345, "Lior Perry");
+            PresenntMaterialWindow win = new PresenntMaterialWindow(ref _controller, m, user);
+            win.Show();
         }
     }
 }

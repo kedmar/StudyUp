@@ -12,8 +12,7 @@ namespace Program
     {
         static void Main(string[] args)
         {
-            Stream stream = null;
-            DocxReader dr = new DocxReader(stream);
+            
         }
     }
 }

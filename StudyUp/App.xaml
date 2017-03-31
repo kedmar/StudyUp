@@ -2,12 +2,12 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:local="clr-namespace:StudyUp"
-             Startup="App_Startup">
+             Startup="OnStartup">
     <Application.Resources>
-        <Style x:Key="GridStyle" TargetType="{x:Type Grid}">
+        <Style x:Key="WindowStyle" TargetType="{x:Type Window}">
             <Setter Property="Background">
                 <Setter.Value>
-                    <SolidColorBrush Color="#FFF68F" Opacity="1"/>
+                    <SolidColorBrush Color="#ece8ef" Opacity="1"/>
                 </Setter.Value>
             </Setter>
             <Setter Property="HorizontalAlignment" Value="Stretch"/>

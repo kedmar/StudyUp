@@ -1,4 +1,4 @@
-﻿<Window x:Class="StudyUp.PresentResults"
+﻿<Window x:Class="StudyUp.PresentResultsWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
@@ -60,7 +60,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -103,7 +103,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -116,7 +116,7 @@
         
         
         
-        <Expander Header="Prsctices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
+        <Expander Header="Practices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
             <DataGrid x:Name="prscticeDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>
@@ -143,7 +143,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -185,7 +185,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -228,7 +228,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -268,7 +268,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>
@@ -308,7 +308,7 @@
                                 <Grid.RowDefinitions>
                                     <RowDefinition Height="*" />
                                 </Grid.RowDefinitions>
-                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Image Grid.Column="0" Source="Images\LikeImg.png"></Image>
                                 <Label Grid.Column="1" Content="{Binding Score}"></Label>
                             </Grid>
                         </DataTemplate>

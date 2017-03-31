@@ -51,8 +51,24 @@ namespace Classes
                 Random rand = new Random();
                 return rand.Next(15, 150);
             }
+            set
+            {
+                Score = value;
+            }
         }
 
+        public override int GetHashCode()
+        {
+            return (Universrty + Course.CourseName + Course.CourseNo + Uploader + Title).GetHashCode(); ;
+        }
+        public override bool Equals(object obj)
+        {
+            return Equals(obj as Material);
+        }
+        public bool Equals(Material obj)
+        {
+            return obj != null && (obj.Universrty + obj.Course.CourseName + obj.Course.CourseNo + obj.Uploader + obj.Title) == (Universrty + Course.CourseName + Course.CourseNo + Uploader + Title);
+        }
 
     }
 }

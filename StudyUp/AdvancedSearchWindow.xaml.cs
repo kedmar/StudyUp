@@ -24,7 +24,7 @@ namespace StudyUp
     public enum Field { None, University, CourseNo, CourseName, Title, Topic, Tag, IsPrinted };
     public partial class AdvancedSearchWindow : Window
     {
-        Controller _controller;
+        IController _controller;
         ObservableCollection<string> _universities;
         ObservableCollection<Courses> _courses;
         ObservableCollection<string> _topics;
@@ -52,7 +52,7 @@ namespace StudyUp
         public AdvancedSearchWindow(IController controller)
         {
             InitializeComponent();
-            controller = _controller;
+            _controller = controller;
             _universities = new ObservableCollection<string>(_controller.GetAllUniversities());
             _courses = new ObservableCollection<Courses>(_controller.GetAllCourses());
             _topics = new ObservableCollection<string>(_controller.GetAllTopics());
