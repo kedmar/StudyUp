@@ -39,7 +39,13 @@ namespace StudyUp
             if (queryTextBox == null || queryTextBox.Text == "")
                 MessageBox.Show("No Query", "Error", MessageBoxButton.OK);
             else
-                _controller.RetreiveMaterialsSimpleSearch(queryTextBox.Text);
+            {
+                Dictionary<Material,Double> res = _controller.RetreiveMaterialsSimpleSearch(queryTextBox.Text);
+                PresentResultsWindow win = new PresentResultsWindow(_controller, res);
+                win.ShowDialog();
+                this.Close();
+            }
+                
         }
 
 

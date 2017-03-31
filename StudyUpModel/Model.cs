@@ -616,6 +616,7 @@ namespace StudyUpModel
             for(int i = 0; i < queryWords.Length; i++)
             {
                 SimpleSearch(results, IDs, queryWords[i]);
+                RunQuery(results, IDs, "SELECT DocID FROM [Doc-Tag] WHERE [Tag] = '" + queryWords[i] + "'");
             }
 
             return results;
@@ -633,9 +634,7 @@ namespace StudyUpModel
                 OleDbDataAdapter adapter = new OleDbDataAdapter();
                 OleDbCommand command;
 
-                string cmdStr = "SELECT * FROM Documents WHERE [Path] = '" + query + "' OR [Type] = '" + query + "' OR [Title] = '" + query + "'";
-                if (isNum)
-                    cmdStr = " OR [ID] = '" + queryNum + "'";
+                string cmdStr = "SELECT * FROM Documents";
 
                 //Create the InsertCommand.
                 command = new OleDbCommand(cmdStr, connection);
@@ -652,6 +651,7 @@ namespace StudyUpModel
             for (int i = 0; i < ds.Tables[0].Rows.Count; i++)
             {
                 int currentID = Convert.ToInt32(ds.Tables[0].Rows[i][0]);
+                if(ds.Tables[0].Rows[i][1].ToString().Contains(query) || ds.Tables[0].Rows[i][2].ToString().Contains(query) || ds.Tables[0].Rows[i][5].ToString().Contains(query) || ds.Tables[0].Rows[i][7].ToString().Contains(query))
                 if (!IDs.Contains(currentID))
                 {
                     string university = GetDocUniversity(currentID);

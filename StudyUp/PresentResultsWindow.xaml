@@ -8,7 +8,7 @@
         Title="PresentResults" Height="300" Width="300">
     <Grid>
         <Grid.Background>
-            <SolidColorBrush Color="#fdfcff"/>
+            <SolidColorBrush Color="#91809e"/>
         </Grid.Background>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="0.1*" />
@@ -245,7 +245,7 @@
 
 
 
-        <Expander Header="Audios" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7" HorizontalAlignment="Right" Margin="0,0.333,0,0" Width="215">
+        <Expander Header="Audios" Grid.Row="6" Grid.Column="2" Grid.ColumnSpan="7">
             <DataGrid x:Name="audioDataGrid">
                 <DataGridHyperlinkColumn Binding="{Binding Title}">
                     <DataGridHyperlinkColumn.ElementStyle>

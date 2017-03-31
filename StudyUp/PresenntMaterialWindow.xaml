@@ -8,7 +8,7 @@
         Title="PresenntMaterialWindow" Height="300"  Width="300">
     <Grid ShowGridLines="True">
         <Grid.Background>
-            <SolidColorBrush Color="#fdfcff"/>
+            <SolidColorBrush Color="#393068"/>
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="*" />
