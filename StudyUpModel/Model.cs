@@ -388,7 +388,7 @@ namespace StudyUpModel
                 DataSet ds = new DataSet();
 
                 //Create the InsertCommand.
-                command = new OleDbCommand("SELECT * FROM Doc-Topic", connection);
+                command = new OleDbCommand("SELECT * FROM [Doc-Topic]", connection);
 
                 adapter.SelectCommand = command;
                 adapter.Fill(ds);
@@ -522,7 +522,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT DocID FROM User-Doc WHERE [User] = '" + uploader + "'", connection);
+                "SELECT DocID FROM [User-Doc] WHERE [User] = '" + uploader + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -719,7 +719,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT ClassID FROM Class-Doc WHERE [DocID] = '" + docID + "'", connection);
+                "SELECT ClassID FROM [Class-Doc] WHERE [DocID] = '" + docID + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -778,7 +778,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT UniversityID FROM Class-Doc WHERE [DocID] = '" + docID + "'", connection);
+                "SELECT UniversityID FROM [Class-Doc] WHERE [DocID] = '" + docID + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -862,7 +862,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "SELECT TopicID FROM Doc-Topic WHERE [DocumentID] = '" + docID + "'", connection);
+                "SELECT TopicID FROM [Doc-Topic] WHERE [DocumentID] = '" + docID + "'", connection);
 
             adapter.SelectCommand = command;
             adapter.Fill(ds);
@@ -886,7 +886,7 @@ namespace StudyUpModel
             {
                 if (!File.Exists(newMaterial.File))
                     return false;
-                File.Copy(newMaterial.File, dataPath + "\\" + Convert.ToInt32(fileCount));
+                File.Copy(newMaterial.File, dataPath + "\\" + Convert.ToInt32(fileCount) + ".pdf");
             }
             catch (Exception e)
             {
@@ -956,7 +956,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO User-Doc ([User], [DocID]) VALUES (?, ?)", connection);
+                "INSERT INTO [User-Doc] ([User], [DocID]) VALUES (?, ?)", connection);
 
             command.Parameters.AddWithValue("@User", currentUser);
             command.Parameters.AddWithValue("@DocID", newMat.ID);
@@ -977,7 +977,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO Class-Doc ([User], [DocID], [UniversityID]) VALUES (?, ?, ?)", connection);
+                "INSERT INTO [Class-Doc] ([User], [DocID], [UniversityID]) VALUES (?, ?, ?)", connection);
 
             command.Parameters.AddWithValue("@ClassID", newMat.Course.CourseNo);
             command.Parameters.AddWithValue("@DocID", newMat.ID);
@@ -1010,7 +1010,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO Doc-Topic ([DocumentID], [TopicID]) VALUES (?, ?)", connection);
+                "INSERT INTO [Doc-Topic] ([DocumentID], [TopicID]) VALUES (?, ?)", connection);
 
             command.Parameters.AddWithValue("@DocumentID", topic);
             command.Parameters.AddWithValue("@TopicID", doc);
@@ -1072,7 +1072,7 @@ namespace StudyUpModel
 
             //Create the InsertCommand.
             command = new OleDbCommand(
-                "INSERT INTO Doc-Tag ([DocID], [Tag]) VALUES (?, ?)", connection);
+                "INSERT INTO [Doc-Tag] ([DocID], [Tag]) VALUES (?, ?)", connection);
 
             command.Parameters.AddWithValue("@DocID", ID);
             command.Parameters.AddWithValue("@Tag", t);
