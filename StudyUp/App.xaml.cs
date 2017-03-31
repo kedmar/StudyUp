@@ -18,8 +18,8 @@ namespace StudyUp
         void OnStartup(object sender, StartupEventArgs e)
         {
             Model model = new Model();
-            Controller controller = new Controller();
-            controller.SetModel(model);
+            IController controller = new FakeController();
+            //controller.SetModel(model);
             MainWindow win = new StudyUp.MainWindow(ref controller);
             win.Show();
 

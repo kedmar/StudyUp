@@ -12,7 +12,7 @@ namespace StudyUp
     public partial class MainWindow : Window
     {
         IController _controller;
-        public MainWindow(ref Controller controller)
+        public MainWindow(ref IController controller)
         {
             InitializeComponent();
             _controller = controller;
