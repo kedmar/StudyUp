@@ -104,6 +104,28 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Classes\Classes.csproj">
+      <Project>{155db85f-be1c-4a6c-9c58-cbebf04a56fd}</Project>
+      <Name>Classes</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Program\Program.csproj">
+      <Project>{6ced7931-dd66-4406-ac29-5b611b969dd4}</Project>
+      <Name>Program</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudyUpController\StudyUpController.csproj">
+      <Project>{85d7f0b2-a6cf-4efe-bc52-e820e02f9601}</Project>
+      <Name>StudyUpController</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudyUpModel\StudyUpModel.csproj">
+      <Project>{eb401a9b-b308-47d3-a10b-d097945da9b0}</Project>
+      <Name>StudyUpModel</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\StudyUp\StudyUp.csproj">
+      <Project>{0ee752fa-8598-4fd4-8477-f8467f8dd5cc}</Project>
+      <Name>StudyUp</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

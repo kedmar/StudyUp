@@ -34,7 +34,24 @@ namespace Classes
         public DateTime UploadedDateTime { get; set; }
         //file = file path
         public string File { get; set; }
-        public int score { get; set; }
+        private int score;
+
+        public string CourseName
+        {
+            get
+            {
+                return Course.CourseName;
+            }
+        }
+
+        public int Score
+        {
+            get
+            {
+                Random rand = new Random();
+                return rand.Next(15, 150);
+            }
+        }
 
 
     }

@@ -1,20 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Classes;
 using StudyUpController;
-using
 using System.Collections.ObjectModel;
+using System;
+using System.Linq;
 
 namespace StudyUp
 {
@@ -25,15 +15,14 @@ namespace StudyUp
     {
         private Dictionary<Material, double> results;
         private IController _controller;
-        ObservableCollection<Material> summariesResults;
-        ObservableCollection<Material> lecturesResults;
-        ObservableCollection<Material> practiceResults;
-        ObservableCollection<Material> formulasResults;
-        ObservableCollection<Material> testResults;
-        ObservableCollection<Material> audioResults;
-        ObservableCollection<Material> videoResults;
 
-
+        private ObservableCollection<Material> summeriesRes;
+        private ObservableCollection<Material> lectursRes;
+        private ObservableCollection<Material> prscticesRes;
+        private ObservableCollection<Material> formulasRes;
+        private ObservableCollection<Material> testsRes;
+        private ObservableCollection<Material> audioRes;
+        private ObservableCollection<Material> videoRes;
 
 
         public PresentResults()
@@ -46,8 +35,53 @@ namespace StudyUp
             this._controller = _controller;
             this.results = results;
 
-            SortResultsByCategory();
+            SplitAndSortResults();
 
+            summaryDataGrid.ItemsSource = summeriesRes;
+            lectureReDataGrid.ItemsSource = lectursRes;
+            prscticeDataGrid.ItemsSource = prscticesRes;
+            formulaDataGrid.ItemsSource = formulasRes;
+            testDataGrid.ItemsSource = testsRes;
+            audioDataGrid.ItemsSource = audioRes;
+            videoDataGrid.ItemsSource = videoRes;
+
+
+        }
+
+        private void SplitAndSortResults()
+        {
+            results = results.OrderBy(i => i.Value).ToDictionary(t => t.Key, t => t.Value);
+
+            foreach (Material material in results.Keys)
+            {
+                switch (material.Category)
+                {
+                    case "Summary":
+                        summeriesRes.Add(material);
+                        break;
+                    case "Lecture":
+                        lectursRes.Add(material);
+                        break;
+                    case "Practice":
+                        prscticesRes.Add(material);
+                        break;
+                    case "FormulasPage":
+                        formulasRes.Add(material);
+                        break;
+                    case "Tests":
+                        testsRes.Add(material);
+                        break;
+                    case "AudioClass":
+                        audioRes.Add(material);
+                        break;
+                    case "VideoClass":
+                        videoRes.Add(material);
+                        break;
+                    default:
+                        MessageBox.Show("", "Worng Category.", MessageBoxButton.OK);
+                        break;
+                }
+            }
         }
     }
 }

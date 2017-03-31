@@ -31,11 +31,290 @@
             <RowDefinition Height="*" />
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
-    <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
-        <Expander Header="Summaries" Grid.Row="1" Grid.Column="1"  Grid.RowSpan="3" Grid.ColumnSpan="4" IsExpanded="True">
-            <DataGrid x:Name="SummarryDataGrid">
-                <DataGridTemplateColumn Header="Title" Width="SizeToCells" IsReadOnly="True">
-            </DataGrid>        
+        <Label Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="4">Results:</Label>
+        <Expander Header="Summaries" Grid.Row="1" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="summaryDataGrid">
+                
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+                
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        
+        
+        <Expander Header="Lectures" Grid.Row="2" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="lectureReDataGrid">
+
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        <Expander Header="Prsctices" Grid.Row="3" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="prscticeDataGrid">
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        
+        
+        
+        <Expander Header="Formulas" Grid.Row="4" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="formulaDataGrid">
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        
+        
+        
+        
+        <Expander Header="Tests" Grid.Row="5" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="testDataGrid">
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        
+        <Expander Header="Audios" Grid.Row="6" Grid.Column="1" Grid.ColumnSpan="7" HorizontalAlignment="Right" Margin="0,0.333,0,0" Width="215">
+            <DataGrid x:Name="audioDataGrid">
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid>
+        </Expander>
+
+        
+        
+        
+        
+        <Expander Header="Video" Grid.Row="7" Grid.Column="2" Grid.ColumnSpan="6">
+            <DataGrid x:Name="videoDataGrid">
+                <DataGridHyperlinkColumn Binding="{Binding Title}">
+                    <DataGridHyperlinkColumn.ElementStyle>
+                        <Style>
+                            <EventSetter Event="Hyperlink.Click" Handler="DG_Hyperlink_Click"/>
+                        </Style>
+                    </DataGridHyperlinkColumn.ElementStyle>
+                </DataGridHyperlinkColumn>
+
+                <DataGridTextColumn Header="Uploader" Binding="{Binding Path=Uploader}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Header="Course" Binding="{Binding Path=CourseName}"  IsReadOnly="True"></DataGridTextColumn>
+
+                <DataGridTextColumn Binding="{Binding UploadedDateTime, StringFormat=\{0:dd.MM.yy HH:mm:ss\}}" />
+
+                <DataGridTemplateColumn Header="Image" Width="SizeToCells" IsReadOnly="True">
+                    <DataGridTemplateColumn.CellTemplate>
+                        <DataTemplate>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*" />
+                                </Grid.RowDefinitions>
+                                <Image Grid.Column="0" Source="LikeImg.png"></Image>
+                                <Label Grid.Column="1" Content="{Binding Score}"></Label>
+                            </Grid>
+                        </DataTemplate>
+                    </DataGridTemplateColumn.CellTemplate>
+                </DataGridTemplateColumn>
+            </DataGrid>
         </Expander>
     </Grid>
 </Window>
