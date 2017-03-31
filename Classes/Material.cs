@@ -51,6 +51,10 @@ namespace Classes
                 Random rand = new Random();
                 return rand.Next(15, 150);
             }
+            set
+            {
+                Score = value;
+            }
         }
 
 

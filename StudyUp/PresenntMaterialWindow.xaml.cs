@@ -30,8 +30,7 @@ namespace StudyUp
             LoadDoc();
             LoadTags();
             Random rand = new Random();
-            material.score = rand.Next(15, 150);
-            likes.Content = material.score;
+            likes.Content = material.Score;
             int index1 = rand.Next(0, 10);
             int index2 = rand.Next(0, 10);
             while(index1== index2)
@@ -75,8 +74,8 @@ namespace StudyUp
 
         private void LikeButton_Click(object sender, RoutedEventArgs e)
         {
-            material.score++;
-            likes.Content = material.score;
+            material.Score++;
+            likes.Content = material.Score;
             likes.Foreground = new SolidColorBrush(Colors.DarkTurquoise);
         }
 

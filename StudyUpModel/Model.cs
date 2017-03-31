@@ -937,7 +937,7 @@ namespace StudyUpModel
             command.Parameters.AddWithValue("@Path", dataPath + "\\" + Convert.ToInt32(fileCount));
             command.Parameters.AddWithValue("@Type", newMat.Category);
             command.Parameters.AddWithValue("@HandWrite", newMat.IsPrinted);
-            command.Parameters.AddWithValue("@Score", newMat.score);
+            command.Parameters.AddWithValue("@Score", newMat.Score);
             command.Parameters.AddWithValue("@Title", newMat.Title);
             command.Parameters.AddWithValue("@UploadDate", newMat.UploadedDateTime);
             adapter.InsertCommand = command;

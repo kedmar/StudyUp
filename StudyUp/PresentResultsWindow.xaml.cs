@@ -5,6 +5,7 @@ using StudyUpController;
 using System.Collections.ObjectModel;
 using System;
 using System.Linq;
+using System.Windows.Controls;
 
 namespace StudyUp
 {
@@ -82,6 +83,17 @@ namespace StudyUp
                         break;
                 }
             }
+        }
+
+
+
+        public void DG_Hyperlink_Click(object sender, RoutedEventArgs e)
+        {
+            DataGridRow row = ItemsControl.ContainerFromElement((DataGrid)sender, e.OriginalSource as DependencyObject) as DataGridRow;
+            Material m = row.Item as Material;
+            User user = new User(12345, "Lior Perry");
+            PresenntMaterialWindow win = new PresenntMaterialWindow(ref _controller, m, user);
+            win.Show();
         }
     }
 }
