@@ -53,6 +53,7 @@ namespace StudyUp
             _categories = new ObservableCollection<string>(_controller.GetAllCategories());
             categoryCmbBx.ItemsSource = _categories;
             Tags = new List<string>();
+            //courseNameTxtBx.LostFocus += LostFocusEvent;
         }
 
         private void Search_Click(object sender, RoutedEventArgs e)
@@ -240,11 +241,19 @@ namespace StudyUp
         private void titleChanged(object sender, TextChangedEventArgs e)
         {
             lastFieldEditted = Field.Title;
+            suggestionsLstBx.Visibility = Visibility.Hidden;
         }
 
         private void CategoryChanged(object sender, SelectionChangedEventArgs e)
         {
             lastFieldEditted = Field.Category;
+            suggestionsLstBx.Visibility = Visibility.Hidden;
+
+        }
+
+        private void LostFocus_event(object sender, RoutedEventArgs e)
+        {
+            suggestionsLstBx.Visibility = Visibility.Hidden;
 
         }
     }
